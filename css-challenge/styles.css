@@ -367,3 +367,104 @@ body{
 
 
 }
+
+.pricing-wrapper{
+    display: flex;
+    flex-direction:column ;
+
+    .pricing-top-wrapper{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin: 6% 0 7% 0;
+
+        h2{
+            margin: 0 0 20px 0;
+        }
+
+        p{
+            color: grey;
+        }
+    }
+
+    .pricing-cards{
+        display: flex;
+        margin-left: 16%;
+
+        .card{
+            display: flex;
+            padding: 30px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            border: 1px solid #3faae6;
+            border-radius: 5px;
+
+            p{
+                margin: 20px 0 20px  0;
+                color: grey;
+            }
+
+            .price-wrapper{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                h2{
+                    color: #3faae6;
+                    margin-right: 10px;
+                    font-size: 44px;
+                    width: fit-content;
+                    height: fit-content;
+                }
+
+                .right-price-wrapper{
+                    display: flex;
+                    flex-direction: column;
+
+                    span{
+                        color: #3faae6;
+                    }
+                }
+            }
+        }
+
+        ul {
+            list-style: none;
+            padding: 10px;
+
+            li{
+                padding: 10px;
+                display: flex;
+                align-items: center;
+            }
+        }
+
+        ul>li>ion-icon{
+            color: rgb(5, 131, 47);
+            width: 25px;
+            height: 25px;
+            margin-right: 5px;
+        }
+
+        ul>li:nth-child(4)>ion-icon{
+            color: grey;
+        }
+
+        ul>li:nth-child(5)>ion-icon{
+            color: grey;
+        }
+
+        button{
+            color: white;
+            background-color: #3faae6;
+            padding: 10px 40px 10px 40px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            margin: 10px 0 10px 0;
+        }
+    }
+}
