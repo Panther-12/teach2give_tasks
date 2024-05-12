@@ -272,7 +272,7 @@ body{
 
 .footer {
     background-color: white;
-    margin: 20px 0 20px 0;
+    margin: 4% 0 5px 0;
     color: grey;
     padding: 20px 0;
     display: flex;
@@ -305,9 +305,10 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 0;
+    padding: 5px 0;
     font-size: 12px;
     width: 50%;
+    height: fit-content;
     margin-left: 25%;
 }
 
@@ -601,6 +602,35 @@ body{
                 border-radius: 5px;
                 margin-top: 20px;
             }
+        }
+    }
+}
+
+.contact-wrapper{
+    margin-top: 45%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 82%;
+    margin-left: 10%;
+
+    .c-left-wrapper{
+        h2{
+            margin-bottom: 10px;
+        }
+        p{
+            color: grey;
+        }
+    }
+
+    .c-right-wrapper {
+        button{
+            background-color: #3faae6;
+            padding: 15px;
+            color: white;
+            border: none;
+            outline: none;
+            border-radius: 5px;
         }
     }
 }
