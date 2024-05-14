@@ -221,10 +221,26 @@
             <div class="form-wrapper">
                 <h2>Book Appointment</h2>
                 <form action="">
-                    <input type="text" name="" id="" placeholder="Full Name *">
-                    <input type="text" name="" id="" placeholder="example@gmail.com">
-                    <input type="text" name="" id="" placeholder="Please Select">
-                    <input type="text" name="" id="" placeholder="4:00 Available">
+                    <label for="fullname">Name *</label>
+                    <input type="text" name="fullname" id="" placeholder="Full Name *">
+                    <label for="email">Email address *</label>
+                    <input type="text" name="email" id="" placeholder="example@gmail.com">
+                    <label for="department">Department *</label>
+                    <input list="department" name="department" placeholder="Please Select"/>
+                        <datalist id="department">
+                          <option value="Finance">
+                          <option value="ICT">
+                          <option value="Human Resource">
+                          <option value="Developer Relations">
+                        </datalist>
+                    <label for="time">Time *</label>
+                    <input list="time" name="time" placeholder="4:00 Available">
+                    <datalist id="time">
+                        <option value="6:00 PM">
+                        <option value="10:00 PM">
+                        <option value="3:00 AM">
+                        <option value="9:00 AM">
+                      </datalist>
                     <button type="button">Book Appointment</button>
                 </form>
             </div>

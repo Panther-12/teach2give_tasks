@@ -150,6 +150,8 @@ body{
     .peace-wrapper:hover{
         background-color: #3faae6;
         color: white;
+        cursor: pointer;
+
         p{
             color:white;
         }
@@ -164,6 +166,7 @@ body{
     .life-wrapper:hover{
         background-color: #3faae6;
         color: white;
+        cursor: pointer;
         p{
             color:white;
         }
@@ -438,6 +441,7 @@ body{
             padding: 20px;
             flex-direction: column;
             justify-content: center;
+            transition: background-color 0.5s ease-in-out;
             align-items: center;
             background-color: white;
             border: 1px solid #3faae6;
@@ -475,6 +479,23 @@ body{
                 }
             }
         }
+
+        .card:hover{
+            background-color: rgb(10, 10, 34) !important;
+            cursor: pointer;
+ 
+            h3{
+             color: white;
+            }
+ 
+            p{
+             color: white;
+            }
+ 
+            ul>li{
+             color: white;
+            }
+         }
 
         .card:nth-child(1){
             margin-top: 40px;
@@ -600,6 +621,7 @@ body{
 
     .form-wrapper{
         display: flex;
+        top: 0;
         flex-direction: column;
         width: 70%;
         align-items: center;
@@ -671,6 +693,12 @@ body{
         }
     }
 }
+
+/* webkit styling */
+input::-webkit-calendar-picker-indicator {
+    opacity: 100;
+    color: grey;
+ }
 
 /* Responsive design */
 @media screen and (max-width: 768px){
@@ -745,6 +773,7 @@ body{
 
             .card:hover{
                 background-color: rgb(10, 10, 34) !important;
+                cursor: pointer;
      
                 h3{
                  color: white;
@@ -770,6 +799,8 @@ body{
             .card:nth-child(3){
                 margin-top: 30px;
             }
+
+            
         }
     }
 
