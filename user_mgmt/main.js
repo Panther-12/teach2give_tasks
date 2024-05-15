@@ -106,12 +106,24 @@ function displayUsers(){
         updateUserbtn.textContent = 'Update'
         updateUserbtn.style.marginLeft = '10px'
         updateUserbtn.addEventListener('click', ()=>{
+            if(updateUserbtn.textContent === 'Cancel'){
+                isUpdating = false
+                updatingUserIndex = null
+                createUserForm.querySelector('.btnsubmit').value = 'Create Account'
+                updateUserbtn.textContent = 'Update'
+                username.value = ''
+                phone.value = ''
+                email.value = ''
+                return
+            }
+            
             isUpdating = true
             updatingUserIndex = index
             username.value = user.full_name
             phone.value = user.phone_number
             email.value = user.user_email
             createUserForm.querySelector('.btnsubmit').value = 'Update'
+            updateUserbtn.textContent = 'Cancel'
         })
 
         let row = document.createElement('tr')
