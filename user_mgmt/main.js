@@ -69,6 +69,21 @@ createUserForm.addEventListener('submit', (event)=>{
     }
 })
 
+var display = false
+document.querySelector('.add-user').addEventListener('click',()=>{
+    display = !display
+    if (display){
+        createUserForm.style.display = 'flex'
+        document.querySelector('.add-user').style.display = 'none'
+        return
+    }
+})
+
+document.querySelector('.btncancel').addEventListener('click', ()=>{
+    createUserForm.style.display = 'none'
+    document.querySelector('.add-user').style.display = 'block'
+})
+
 function displayUsers(){
 
     let listOfUsers = localStorage.getItem('users')
@@ -96,6 +111,7 @@ function displayUsers(){
 
         let deleteUserbtn = document.createElement('button')
         deleteUserbtn.textContent = 'Delete'
+        deleteUserbtn.style.background = 'red'
         deleteUserbtn.addEventListener('click', ()=>{
             users.splice(index, 1)
             localStorage.setItem('users', JSON.stringify(users))
@@ -105,6 +121,7 @@ function displayUsers(){
         let updateUserbtn = document.createElement('button')
         updateUserbtn.textContent = 'Update'
         updateUserbtn.style.marginLeft = '10px'
+        updateUserbtn.style.background = 'green'
         updateUserbtn.addEventListener('click', ()=>{
             if(updateUserbtn.textContent === 'Cancel'){
                 isUpdating = false
@@ -143,3 +160,4 @@ function displayUsers(){
 }
 
 displayUsers()
+

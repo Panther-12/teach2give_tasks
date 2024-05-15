@@ -12,13 +12,17 @@
 }
 
 .create-user-form{
+    display: none;
     padding: 20px;
     width: 20vw;
     min-width: 280px;
-    display: flex;
     flex-direction: column;
     align-items: center;
     box-shadow: 1px 1px 1px 1px lightgray;
+}
+.add-user{
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .create-user-form  input{
@@ -27,14 +31,43 @@
     min-width: 250px;
 }
 
+.bottom-buttons{
+    display: flex !important;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
 .btnsubmit{
     margin-top: 20px;
     background-color: skyblue;
     border: none;
-    padding: 20px 10px;
+    padding: 10px 2px;
+    color: white;
+    cursor: pointer;
+}
+.btncancel{
+    margin-top: 20px;
+    background-color: skyblue;
+    border: none;
+    padding: 10px 2px;
+    color: white;
     cursor: pointer;
 }
 
+button[value="Update"]{
+    background-color: red;
+}
+button{
+    background-color: skyblue;
+    border: none;
+    padding:5px;
+    margin: 5px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
 .btnsubmit:hover{
     background-color: rgb(75, 186, 231);
 }
