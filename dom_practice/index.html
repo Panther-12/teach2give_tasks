@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>user management system</title>
+</head>
+<body>
+    <div class="top-wrapper">
+        <button class="add-btn">
+            <i class="fas fa-plus"></i> Add
+        </button>
+
+        <!-- Search -->
+        <div class="search">
+            <input type="text" id="search-input" placeholder="Search user...">
+            <button id="search-btn">Search</button>
+        </div>
+    </div>
+
+
+    <table>
+        <thead>
+            <tr>
+                <td><input type="checkbox"></td>
+                <th>Name</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td class="profile"><img src="../css-challenge/images/user2.png" class="profile-img"> Nimrod</td>
+                <td>0740837666</td>
+                <td>nimrodnyongesa7@gmail.com</td>
+                <td>
+                    <i class="fas fa-eye"></i>
+                    <i class="fas fa-edit"></i>
+                    <i class="fas fa-trash-alt"></i>
+                </td>
+            </tr>
+    </table>
+
+<!-- Add/Edit Form -->
+<div id="user-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <form id="user-form">
+            <input type="hidden" id="user-id">
+            <input type="text" id="name" placeholder="Name">
+            <input type="text" id="phone_number" placeholder="Phone Number">
+            <input type="text" id="email" placeholder="Email">
+            <button type="submit" id="submit-btn">Submit</button>
+        </form>
+    </div>
+</div>
+
+<!-- View User Modal -->
+<div id="view-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-details">&times;</span>
+        <h2>User Details</h2>
+        <p id="view-name"></p>
+        <p id="view-phone"></p>
+        <p id="view-email"></p>
+    </div>
+</div>
+
+<script src="./main.js"></script>
+</body>
+</html>

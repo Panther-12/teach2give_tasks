@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="main">
+        <h2>User management system</h2>
+
+        <div style="display:flex; gap:30px; flex-wrap:wrap;">
+            <form class="create-user-form">
+                <div class="inputs">
+                    <label for="">Full name</label>
+                    <br>
+                    <input type="text" name="" id="name">
+                    <p id="nameError"></p>
+                </div><br>
+                <div class="inputs">
+                    <label for="">Phone number</label>
+                    <br>
+                    <input type="number" name="" id="phone_no">
+                    <p id="phonenoError"></p>
+                </div><br>
+                <div class="inputs">
+                    <label for="">Email</label>
+                    <br>
+                    <input type="email" name="" id="email">
+                    <p id="emailError"></p>
+                </div>
+               
+                <input type="submit" class="btnsubmit" value="Create Account">
+            </form>
+            <table id="displayUserstbl">
+                <tr>
+                    <th>No.</th>
+                    <th>Name</th>
+                    <th>Phone number</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+                
+            </table>
+        </div>
+    </div>
+
+    
+    
+    <script src="main.js"></script>
+</body>
+</html>
