@@ -54,6 +54,7 @@ createUserForm.addEventListener('submit', (event)=>{
             allUsers[updatingUserIndex] = newUser
             isUpdating = false
             updatingUserIndex = null
+            createUserForm.querySelector('.btnsubmit').value = 'Create Account'
         } else {
             allUsers.push(newUser)
         }
@@ -110,6 +111,7 @@ function displayUsers(){
             username.value = user.full_name
             phone.value = user.phone_number
             email.value = user.user_email
+            createUserForm.querySelector('.btnsubmit').value = 'Update'
         })
 
         let row = document.createElement('tr')
