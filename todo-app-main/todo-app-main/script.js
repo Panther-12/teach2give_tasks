@@ -10,21 +10,20 @@ document.addEventListener('DOMContentLoaded', (event) => {
     var switchMode = false
 
     let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    if (tasks.length === 0){
-        noWrapper.textContent = '0 tasks left';
-        noWrapper.style.display = 'flex';
-        noWrapper.style.alignItems = 'center'
-        noWrapper.style.marginTop = '3%'
-    }
-    noWrapper.textContent = `${tasks.length} tasks left`;
-    noWrapper.style.display = 'flex';
-    noWrapper.style.alignItems = 'center'
-    noWrapper.style.marginTop = '3%'
     
 
     function renderTasks(filter = 'all') {
+        while (taskList.firstElementChild) {
+            taskList.removeChild(taskList.firstElementChild);
+        }
+
+        noWrapper.textContent = `${tasks.filter(item => !item.completed).length} tasks left`;
+        noWrapper.style.display = 'flex';
+        noWrapper.style.alignItems = 'center'
+        noWrapper.style.marginTop = '3%'
+
         taskList.innerHTML = '';
-        tasks.filter(task => {
+        tasks.filter((task,index) => {
             if (filter === 'all') return true;
             if (filter === 'active') return !task.completed;
             if (filter === 'completed') return task.completed;
@@ -40,16 +39,75 @@ document.addEventListener('DOMContentLoaded', (event) => {
             });
             li.appendChild(checkbox);
             li.appendChild(document.createTextNode(task.text));
+            var logo = document.createElement('div')
+            logo.className = "close"
+            logo.innerHTML = "&times"
+            logo.style.textDecoration = "none"
+
+            logo.addEventListener('click', ()=>{
+                let task_index = ""
+                task_index = tasks.map((item, index)=>{
+                    if(task.text === item.text ) { return index}
+                })
+                let final = task_index.filter(i => i !== undefined)
+                tasks.splice(final[0],1)
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+                renderTasks();
+                return
+            })
+            li.appendChild(logo)
             if (task.completed) li.classList.add('completed');
+            li.style.display = "flex"
             taskList.appendChild(li);
         });
+
+        if(!switchMode){
+            if(!switchMode){
+                backgroundWrapper.style.background ="url('./images/bg-desktop-light.jpg')"
+                backgroundWrapper.style.backgroundRepeat = 'no-repeat'
+                backgroundWrapper.style.backgroundPosition = 'center'
+                backgroundWrapper.style.backgroundSize = 'cover'
+                document.querySelector(".input-wrapper").style.backgroundColor = "white"
+                document.querySelector(".items-wrapper").style.backgroundColor = "white"
+                document.querySelector(".items-wrapper").style.color = "black"
+                document.getElementById("task-list").childNodes.forEach(child => {
+                    child.style.background = "rgba(173,173,173,0.8)"
+                })
+                document.getElementById("light-mode-toggle").style.display = "none"
+                document.getElementById("dark-mode-toggle").style.display = "block"
+                document.body.style.backgroundColor = "white"
+                newTaskInput.style.color = "black"
+                document.querySelectorAll("input").forEach(item =>{
+                    if (item.type == 'checkbox' && item.checked == false){
+                        item.style.border = '1px solid rgb(0,0,0)'
+                    }
+                })
+                document.getElementById("dark-mode-toggle").addEventListener('click', ()=>{
+                    backgroundWrapper.style.background ="url('./images/bg-desktop-dark.jpg')"
+                    backgroundWrapper.style.backgroundRepeat = 'no-repeat'
+                    backgroundWrapper.style.backgroundPosition = 'center'
+                    backgroundWrapper.style.backgroundSize = 'cover'
+                    document.body.style.backgroundColor = "rgb(24, 8, 24)"
+                    document.querySelector(".input-wrapper").style.backgroundColor = "rgb(24, 8, 24)"
+                    document.querySelector(".items-wrapper").style.backgroundColor = "rgb(24, 8, 24)"
+                    document.querySelector(".items-wrapper").style.color = "white"
+                                document.getElementById("task-list").childNodes.forEach(child => {
+                    child.style.background = "rgba(255,255,255,0.1)"
+                })
+                    document.getElementById("dark-mode-toggle").style.display = "none"
+                    document.getElementById("light-mode-toggle").style.display = "block"
+                    newTaskInput.style.color = "white"
+                    return
+                })
+                return
+            }
+        }
     }
 
     addTaskButton.addEventListener('click', () => {
         tasks.push({ text: newTaskInput.value, completed: false });
         localStorage.setItem('tasks', JSON.stringify(tasks));
         newTaskInput.value = '';
-        window.location.reload()
         renderTasks();
     });
 
@@ -68,6 +126,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
             document.getElementById("light-mode-toggle").style.display = "none"
             document.getElementById("dark-mode-toggle").style.display = "block"
             document.body.style.backgroundColor = "white"
+            newTaskInput.style.color = "black"
+            document.querySelectorAll("input").forEach(item =>{
+                if (item.type == 'checkbox'){
+                    item.style.border = '1px solid rgb(0,0,0,0.7)'
+                }
+            })
             document.getElementById("dark-mode-toggle").addEventListener('click', ()=>{
                 backgroundWrapper.style.background ="url('./images/bg-desktop-dark.jpg')"
                 backgroundWrapper.style.backgroundRepeat = 'no-repeat'
@@ -82,6 +146,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             })
                 document.getElementById("dark-mode-toggle").style.display = "none"
                 document.getElementById("light-mode-toggle").style.display = "block"
+                newTaskInput.style.color = "white"
                 return
             })
             return
@@ -91,7 +156,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     clearCompletedButton.addEventListener('click', () => {
         tasks = tasks.filter(task => !task.completed);
         localStorage.setItem('tasks', JSON.stringify(tasks));
-        window.location.reload()
         renderTasks();
     });
 

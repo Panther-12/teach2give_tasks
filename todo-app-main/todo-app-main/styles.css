@@ -86,6 +86,12 @@ body {
     cursor: pointer;
 }
 
+.close{
+    margin-left: 20px;
+    text-decoration: none !important;
+    cursor: pointer;
+}
+
 #task-list li input[type="checkbox"]:before {
     content: "";
     display: block;
