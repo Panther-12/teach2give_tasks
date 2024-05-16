@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const filterButtons = document.querySelectorAll('.filter');
     const noWrapper = document.getElementById('no-wrapper');
     var switchMode = false
+    localStorage.setItem("switch",switchMode)
 
     let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     
@@ -61,14 +62,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
             taskList.appendChild(li);
         });
 
-        if(!switchMode){
-            if(!switchMode){
+        if(localStorage.getItem("switch")){
                 backgroundWrapper.style.background ="url('./images/bg-desktop-light.jpg')"
                 backgroundWrapper.style.backgroundRepeat = 'no-repeat'
                 backgroundWrapper.style.backgroundPosition = 'center'
                 backgroundWrapper.style.backgroundSize = 'cover'
                 document.querySelector(".input-wrapper").style.backgroundColor = "white"
                 document.querySelector(".items-wrapper").style.backgroundColor = "white"
+                document.querySelector(".input-wrapper").style.transition = "background-color 0.5s ease-in-out"
+                document.querySelector(".items-wrapper").style.transition = "background-color 0.5s ease-in-out"
                 document.querySelector(".items-wrapper").style.color = "black"
                 document.getElementById("task-list").childNodes.forEach(child => {
                     child.style.background = "rgba(173,173,173,0.8)"
@@ -101,7 +103,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 })
                 return
             }
-        }
     }
 
     addTaskButton.addEventListener('click', () => {
@@ -111,8 +112,19 @@ document.addEventListener('DOMContentLoaded', (event) => {
         renderTasks();
     });
 
+    newTaskInput.addEventListener('keypress', (event)=>{
+          if(event.key === 'Enter'){
+            event.preventDefault()
+            tasks.push({ text: newTaskInput.value, completed: false });
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+            newTaskInput.value = '';
+            renderTasks();
+        }
+    })
+
     themeButton.addEventListener('click', ()=>{
         if(!switchMode){
+            localStorage.setItem("switch",true)
             backgroundWrapper.style.background ="url('./images/bg-desktop-light.jpg')"
             backgroundWrapper.style.backgroundRepeat = 'no-repeat'
             backgroundWrapper.style.backgroundPosition = 'center'
@@ -133,6 +145,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 }
             })
             document.getElementById("dark-mode-toggle").addEventListener('click', ()=>{
+                localStorage.setItem("switch",false)
                 backgroundWrapper.style.background ="url('./images/bg-desktop-dark.jpg')"
                 backgroundWrapper.style.backgroundRepeat = 'no-repeat'
                 backgroundWrapper.style.backgroundPosition = 'center'
@@ -168,7 +181,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     renderTasks();
 });
 
-const filterButtons = document.querySelector('.filter');
-filterButtons.addEventListener('click', () => {
-    filterButtons.style.color = 'blue'
-});
+// const filterButtons = document.querySelector('.filter');
+// filterButtons.addEventListener('click', () => {
+//     filterButtons.style.color = 'blue'
+// });
