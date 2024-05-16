@@ -3,9 +3,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const newTaskInput = document.getElementById('new-task');
     const addTaskButton = document.getElementById('add-task');
     const clearCompletedButton = document.getElementById('clear-completed');
-    const backgroundWrapper = document.getElementsByClassName("bg-wrapper");
+    const backgroundWrapper = document.getElementById("bg");
     const themeButton = document.getElementById("light-mode-toggle");
     const filterButtons = document.querySelectorAll('.filter');
+    var switchMode = false
 
     let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
@@ -40,7 +41,26 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 
     themeButton.addEventListener('click', ()=>{
-        backgroundWrapper.style.background ="url('./images/bg-desktop-light.jpg')"
+        if(!switchMode){
+            backgroundWrapper.style.background ="url('./images/bg-desktop-light.jpg')"
+            backgroundWrapper.style.backgroundRepeat = 'no-repeat'
+            backgroundWrapper.style.backgroundPosition = 'center'
+            backgroundWrapper.style.backgroundSize = 'cover'
+            document.getElementById("light-mode-toggle").style.display = "none"
+            document.getElementById("dark-mode-toggle").style.display = "block"
+            document.body.style.backgroundColor = "white"
+            document.getElementById("dark-mode-toggle").addEventListener('click', ()=>{
+                backgroundWrapper.style.background ="url('./images/bg-desktop-dark.jpg')"
+                backgroundWrapper.style.backgroundRepeat = 'no-repeat'
+                backgroundWrapper.style.backgroundPosition = 'center'
+                backgroundWrapper.style.backgroundSize = 'cover'
+                document.body.style.backgroundColor = "rgb(24, 8, 24)"
+                document.getElementById("dark-mode-toggle").style.display = "none"
+                document.getElementById("light-mode-toggle").style.display = "block"
+                return
+            })
+            return
+        }
     })
 
     clearCompletedButton.addEventListener('click', () => {
@@ -58,7 +78,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     renderTasks();
 });
 
-const filterButtons = document.querySelectorAll('.filter');
+const filterButtons = document.querySelector('.filter');
 filterButtons.addEventListener('click', () => {
     filterButtons.style.color = 'blue'
 });
