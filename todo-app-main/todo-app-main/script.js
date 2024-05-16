@@ -51,3 +51,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     renderTasks();
 });
+
+const filterButtons = document.querySelectorAll('.filter');
+filterButtons.addEventListener('click', () => {
+    filterButtons.style.color = 'blue'
+});
