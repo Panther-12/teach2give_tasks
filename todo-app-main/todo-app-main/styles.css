@@ -51,15 +51,16 @@ body {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    background: purple;
-    color: white;
+    background: inherit;
+    color: grey;
     cursor: pointer;
+    float: right;
 }
 
 #task-list {
     margin-top: 20px;
-    justify-content: center;
     align-items: center;
+    left: 0;
 }
 
 #task-list li {
@@ -106,7 +107,7 @@ body {
 .filter {
     background: none;
     border: none;
-    color: white;
+    color: grey;
     text-decoration: none;
     transition: color 0.3s ease-in-out;
     cursor: pointer;
@@ -120,7 +121,7 @@ body {
     margin-top: 20px;
     background: none;
     border: none;
-    color: white;
+    color: grey;
     cursor: pointer;
 }
 
@@ -128,6 +129,11 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    color:grey;
+}
+
+.no-wrapper{
+    color: grey;
 }
 
 .title-wrapper{
@@ -144,7 +150,15 @@ body {
 .input-wrapper{
     border-radius: 5px;
     background-color:rgb(22, 10, 22) ;
-    padding: 20px;
+    padding: 15px;
+}
+
+input[type="text"]{
+    background-color: inherit;
+    color:white;
+}
+input[type="text"]:focus{
+    outline: none;
 }
 
 .items-wrapper{
