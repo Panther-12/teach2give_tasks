@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const newTaskInput = document.getElementById('new-task');
     const addTaskButton = document.getElementById('add-task');
     const clearCompletedButton = document.getElementById('clear-completed');
+    const backgroundWrapper = document.getElementsByClassName("bg-wrapper");
+    const themeButton = document.getElementById("light-mode-toggle");
     const filterButtons = document.querySelectorAll('.filter');
 
     let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
@@ -36,6 +38,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
         newTaskInput.value = '';
         renderTasks();
     });
+
+    themeButton.addEventListener('click', ()=>{
+        backgroundWrapper.style.background ="url('./images/bg-desktop-light.jpg')"
+    })
 
     clearCompletedButton.addEventListener('click', () => {
         tasks = tasks.filter(task => !task.completed);
