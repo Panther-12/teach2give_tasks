@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
 
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
+  <link rel="stylesheet" type="text/css" href="styles.css">
   <title>Frontend Mentor | Todo app</title>
 
   <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
@@ -15,22 +15,29 @@
   </style>
 </head>
 <body>
-
-  Todo
-
-  <!-- Add dynamic number --> items left
-
-  All
-  Active 
-  Completed
-
-  Clear Completed
-
-  Drag and drop to reorder list
-
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
+  <div id="todo-app">
+    <div class="top-items-wrapper">
+      <div class="title-wrapper">
+        <h1>TODO</h1>
+        <img src="./images/icon-sun.svg" alt="Dark mode icon" id="dark-mode-toggle">
+      </div>
+      <div class="input-wrapper">
+        <input id="new-task" type="text" placeholder="Create a new todo..">
+        <button id="add-task">Add</button>
+      </div>
+    </div>
+    <div class="items-wrapper">
+      <ul id="task-list"></ul>
+      <div class="bottom-items-wrapper">
+        <div id="filters">
+          <button class="filter" data-filter="all">All</button>
+          <button class="filter" data-filter="active">Active</button>
+          <button class="filter" data-filter="completed">Completed</button>
+        </div>
+        <button id="clear-completed">Clear completed</button>
+      </div>
+    </div>
+</div>
+<script src="script.js"></script>
 </body>
 </html>
