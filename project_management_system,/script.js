@@ -67,6 +67,30 @@ document.addEventListener('DOMContentLoaded', (event) => {
         renderProjects();
     });
 
+    projectDescriptionInput.addEventListener("keypress",(event)=>{
+        if(event.key === "Enter"){
+            event.preventDefault()
+            const id = projectIdInput.value;
+            if (id) {
+                projects[id] = {
+                    name: projectNameInput.value,
+                    description: projectDescriptionInput.value
+                };
+            } else {
+                projects.push({
+                    name: projectNameInput.value,
+                    description: projectDescriptionInput.value
+                });
+            }
+            localStorage.setItem('projects', JSON.stringify(projects));
+            projectIdInput.value = '';
+            projectNameInput.value = '';
+            projectDescriptionInput.value = '';
+            renderProjects();
+        }
+
+    })
+
     renderProjects();
 });
 
@@ -83,7 +107,7 @@ document.getElementById('search').addEventListener('input', (event) => {
     projects.forEach((project) => {
         const name = project.querySelector('h2').textContent.toLowerCase();
         if (name.includes(searchTerm)) {
-            project.style.display = 'flex';
+            project.style.display = 'block';
         } else {
             project.style.display = 'none';
         }
