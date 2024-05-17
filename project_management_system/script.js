@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 projectList.style.display = 'none';
                 projectForm.style.display = 'none';
                 projectView.style.display = 'block';
-                window.history.pushState({}, '', '/project/' + index);
+                window.history.pushState({}, '', '/project_management_system/' + index);
             });
             div.querySelector('.edit').addEventListener('click', () => {
                 projectIdInput.value = index;
@@ -94,11 +94,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
     renderProjects();
 });
 
+const projectList = document.getElementById('project-list');
+const projectForm = document.getElementById('project-form');
+const projectView = document.getElementById('project-view');
 document.getElementById('back').addEventListener('click', () => {
     projectList.style.display = 'block';
     projectForm.style.display = 'block';
     projectView.style.display = 'none';
-    window.history.pushState({}, '', '/');
+    window.location.href = 'index.html'
 });
 
 document.getElementById('search').addEventListener('input', (event) => {
