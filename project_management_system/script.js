@@ -7,8 +7,19 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const projectView = document.getElementById('project-view');
     const projectViewName = document.getElementById('project-view-name');
     const projectViewDescription = document.getElementById('project-view-description');
+    const errorModal = document.getElementById('error-modal');
+    const errorMessage = document.getElementById('error-message');
+
 
     let projects = JSON.parse(localStorage.getItem('projects')) || [];
+
+    function validateForm() {
+        if (projectNameInput.value && projectDescriptionInput.value) {
+            saveButton.disabled = false;
+        } else {
+            saveButton.disabled = true;
+        }
+    }    
 
     function renderProjects() {
         projectList.innerHTML = '';
@@ -46,9 +57,22 @@ document.addEventListener('DOMContentLoaded', (event) => {
         });
     }
 
+    function showErrorModal(message, type) {
+        errorMessage.textContent = message;
+        const modalContent = document.querySelector('.modal-content');
+        modalContent.className = 'modal-content ' + type;
+        errorModal.style.display = 'block';
+    }
+
     projectForm.addEventListener('submit', (event) => {
         event.preventDefault();
         const id = projectIdInput.value;
+
+        if (!projectNameInput.value || !projectDescriptionInput.value) {
+            showErrorModal('All fields are required.', 'alert');
+            return
+        }
+
         if (id) {
             projects[id] = {
                 name: projectNameInput.value,
@@ -65,6 +89,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
         projectNameInput.value = '';
         projectDescriptionInput.value = '';
         renderProjects();
+    });
+
+    document.getElementById('close-modal').addEventListener('click', () => {
+        errorModal.style.display = 'none';
     });
 
     projectDescriptionInput.addEventListener("keypress",(event)=>{
