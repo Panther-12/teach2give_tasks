@@ -1,0 +1,40 @@
+body {
+    background-color: indigo;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+#project-list {
+    margin-bottom: 20px;
+}
+
+.project {
+    background-color: darkblue;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+#project-form {
+    background-color: darkblue;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#project-form input,
+#project-form textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+#project-form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: purple;
+    color: white;
+    cursor: pointer;
+}
