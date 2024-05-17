@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const projectNameInput = document.getElementById('project-name');
     const projectDescriptionInput = document.getElementById('project-description');
     const projectForm = document.getElementById('project-form');
+    const projectView = document.getElementById('project-view');
+    const projectViewName = document.getElementById('project-view-name');
+    const projectViewDescription = document.getElementById('project-view-description');
 
     let projects = JSON.parse(localStorage.getItem('projects')) || [];
 
@@ -15,9 +18,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
             div.innerHTML = `
                 <h2>${project.name}</h2>
                 <p>${project.description}</p>
+                <button class="view">View</button>
                 <button class="edit">Edit</button>
                 <button class="delete">Delete</button>
             `;
+            div.querySelector('.view').addEventListener('click', () => {
+                projectViewName.textContent = project.name;
+                projectViewDescription.textContent = project.description;
+                projectList.style.display = 'none';
+                projectForm.style.display = 'none';
+                projectView.style.display = 'block';
+                window.history.pushState({}, '', '/project/' + index);
+            });
             div.querySelector('.edit').addEventListener('click', () => {
                 projectIdInput.value = index;
                 projectNameInput.value = project.name;
@@ -54,4 +66,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 
     renderProjects();
+});
+
+document.getElementById('back').addEventListener('click', () => {
+    projectList.style.display = 'block';
+    projectForm.style.display = 'block';
+    projectView.style.display = 'none';
+    window.history.pushState({}, '', '/');
 });
