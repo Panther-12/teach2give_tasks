@@ -16,11 +16,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
             const div = document.createElement('div');
             div.className = 'project';
             div.innerHTML = `
-                <h2>${project.name}</h2>
-                <p>${project.description}</p>
-                <button class="view">View</button>
-                <button class="edit">Edit</button>
-                <button class="delete">Delete</button>
+            <h2>${project.name}</h2>
+            <p>${project.description}</p>
+            <div class="button-container">
+                <button class="view"><ion-icon name="eye-outline"></ion-icon></button>
+                <button class="edit"><ion-icon name="create-outline"></ion-icon></button>
+                <button class="delete"><ion-icon name="trash-outline"></ion-icon></button>
+            </div>
             `;
             div.querySelector('.view').addEventListener('click', () => {
                 projectViewName.textContent = project.name;
@@ -73,4 +75,17 @@ document.getElementById('back').addEventListener('click', () => {
     projectForm.style.display = 'block';
     projectView.style.display = 'none';
     window.history.pushState({}, '', '/');
+});
+
+document.getElementById('search').addEventListener('input', (event) => {
+    const searchTerm = event.target.value.toLowerCase();
+    const projects = document.querySelectorAll('.project');
+    projects.forEach((project) => {
+        const name = project.querySelector('h2').textContent.toLowerCase();
+        if (name.includes(searchTerm)) {
+            project.style.display = 'flex';
+        } else {
+            project.style.display = 'none';
+        }
+    });
 });

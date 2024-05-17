@@ -1,24 +1,71 @@
 body {
-    background-color: indigo;
-    color: white;
+    background-color: #f4f4f4;
     font-family: Arial, sans-serif;
+    padding: 20px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #project-list {
-    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
 }
 
 .project {
-    background-color: darkblue;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
+    background-color: #fff;
+    margin: 10px;
+    width: calc(33% - 20px);
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+}
+
+.project h2 {
+    margin: 0 0 10px;
+    text-align: center;
+}
+
+.project p {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.project button {
+    margin-top: 10px;
+    border: none;
+    width: fit-content;
+    height: fit-content;
+    background-color: none;
+    margin-left: 10px;
+    cursor: pointer;
+
+    ion-icon{
+        width: 30px;
+        background-color: none;
+        height: 30px;
+    }
 }
 
 #project-form {
-    background-color: darkblue;
-    padding: 10px;
-    border-radius: 5px;
+    width: 100%;
+    max-width: 600px;
+    background-color: #fff;
+    padding: 20px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 #project-form input,
@@ -26,15 +73,119 @@ body {
     width: 100%;
     margin-bottom: 10px;
     padding: 10px;
-    border-radius: 5px;
-    border: none;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 #project-form button {
     padding: 10px 20px;
     border: none;
-    border-radius: 5px;
-    background-color: purple;
+    border-radius: 4px;
+    background-color: #008CBA;
     color: white;
     cursor: pointer;
+}
+
+#project-view {
+    width: 100%;
+    max-width: 600px;
+    background-color: #fff;
+    padding: 20px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#project-view h2 {
+    margin-bottom: 10px;
+}
+
+#project-view button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #008CBA;
+    color: white;
+    cursor: pointer;
+}
+
+.view{
+    ion-icon{
+        color: #008CBA;
+    }
+
+}
+.edit{
+    ion-icon{
+        color: orange;
+    }
+
+}
+
+.delete{
+    ion-icon{
+        color: red;
+    }
+
+}
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #008CBA;
+    color: white;
+}
+
+.logo {
+    font-size: 24px;
+}
+
+.search-container {
+    width: 100%;
+}
+
+#search {
+    width: 100%;
+    padding: 5px;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#project-form {
+    width: calc(33% - 20px);
+    margin-right: 20px;
+}
+
+#project-list {
+    width: calc(66% - 20px);
+}
+
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #project-form,
+    #project-list {
+        width: 100%;
+    }
+    .project {
+        width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 480px) {
+    .project {
+        width: calc(100% - 20px);
+    }
 }
