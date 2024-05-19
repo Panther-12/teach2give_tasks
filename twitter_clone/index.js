@@ -93,7 +93,7 @@ function displayComments(comments) {
             <p>${comment.body}</p>
             <div class="comment-icons">
                 <div><i class="far fa-comment" style="color:orange;"></i><span>12</span></div>
-                <div><i class="far fa-heart" style="color:red;"></i><span>34</span></div>
+                <div><i class="fas fa-heart" style="color:red;"></i><span>34</span></div>
                 <div><i class="far fa-share-square" style="color:green;"></i><span>5</span></div>
             </div>`;
         commentsContainer.appendChild(commentDiv);
