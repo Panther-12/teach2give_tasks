@@ -31,7 +31,7 @@ body {
 .top-nav .search-bar input {
     padding: 5px 10px;
     border: none;
-    border-radius: 20px;
+    border-radius: 5px;
     width: 200px;
 }
 
@@ -45,7 +45,7 @@ body {
 .background-image {
     width: 100%;
     height: 100%;
-    background-image: url('https://via.placeholder.com/800x200');
+    background-image: url('https://images.unsplash.com/photo-1715708098689-9077c95a4f89?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
     background-size: cover;
     background-position: center;
 }
@@ -160,4 +160,8 @@ select {
 
 .post-header .twitter-icon {
     color: #1da1f2;
+}
+
+#searchInput{
+    padding: 15px;
 }
