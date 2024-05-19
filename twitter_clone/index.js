@@ -3,6 +3,10 @@ const postsContainer = document.getElementById('postsContainer');
 const commentsContainer = document.getElementById('commentsContainer');
 const searchInput = document.getElementById('searchInput');
 
+const userName = document.getElementById('userName');
+const userEmail = document.getElementById('userEmail');
+const userAddress = document.getElementById('userAddress');
+
 let allPosts = [];
 let allComments = [];
 
@@ -17,11 +21,13 @@ fetch('https://jsonplaceholder.typicode.com/users')
             userSelect.appendChild(option);
         });
         userSelect.value = 1;
+        fetchUserDetails(1);
         fetchPosts(1);
     });
 
 userSelect.addEventListener('change', (event) => {
     const userId = event.target.value;
+    fetchUserDetails(userId);
     fetchPosts(userId);
 });
 
@@ -29,6 +35,16 @@ searchInput.addEventListener('input', (event) => {
     const query = event.target.value.toLowerCase();
     filterContent(query);
 });
+
+function fetchUserDetails(userId) {
+    fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
+        .then(response => response.json())
+        .then(user => {
+            userName.textContent = user.name;
+            userEmail.textContent = user.email;
+            userAddress.textContent = `${user.address.street}, ${user.address.city}`;
+        });
+}
 
 function fetchPosts(userId) {
     fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
@@ -54,7 +70,14 @@ function displayPosts(posts) {
     posts.forEach(post => {
         const postDiv = document.createElement('div');
         postDiv.className = 'post';
-        postDiv.innerHTML = `<h2>${post.title}</h2><p>${post.body}</p>`;
+        postDiv.innerHTML = `
+            <div class="post-header">
+                <span class="username">${post.userId}</span>
+                <i class="fas fa-check-circle verified-icon"></i>
+                <i class="fab fa-twitter twitter-icon"></i>
+            </div>
+            <h2>${post.title}</h2>
+            <p>${post.body}</p>`;
         postDiv.addEventListener('click', () => fetchComments(post.id));
         postsContainer.appendChild(postDiv);
     });

@@ -19,7 +19,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 0;
+    padding: 30px 20px;
     background-color: #1da1f2;
     color: white;
 }
@@ -38,7 +38,8 @@ body {
 .profile-wrapper {
     position: relative;
     width: 100%;
-    height: 200px;
+    height: 250px;
+    text-align: center;
 }
 
 .background-image {
@@ -51,20 +52,36 @@ body {
 
 .profile-image {
     position: absolute;
-    bottom: -50px;
-    left: 20px;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
     width: 100px;
     height: 100px;
     border-radius: 50%;
     border: 5px solid white;
 }
 
-main {
+.user-details {
+    text-align: center;
     margin-top: 60px;
 }
 
+.user-details h2 {
+    margin: 10px 0 5px;
+}
+
+.user-details p {
+    margin: 5px 0;
+    color: #657786;
+}
+
+main {
+    margin-top: 20px;
+}
+
 .user-selection {
-    margin-bottom: 20px;
+    margin-bottom: 60px;
+    margin-top: 20%;
 }
 
 label {
@@ -124,4 +141,23 @@ select {
 
 .comment-icons div span {
     margin-left: 5px;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.post-header .username {
+    margin-right: 5px;
+}
+
+.post-header .verified-icon {
+    color: #1da1f2;
+    margin-right: 5px;
+}
+
+.post-header .twitter-icon {
+    color: #1da1f2;
 }
