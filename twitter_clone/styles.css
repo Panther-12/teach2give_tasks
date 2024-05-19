@@ -1,0 +1,126 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 0 20px 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    background-color: #1da1f2;
+    color: white;
+}
+
+.top-nav .logo h1 {
+    margin: 0;
+}
+
+.top-nav .search-bar input {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 20px;
+}
+
+.profile-wrapper {
+    position: relative;
+    width: 100%;
+    height: 200px;
+}
+
+.background-image {
+    width: 100%;
+    height: 100%;
+    background-image: url('https://via.placeholder.com/800x200');
+    background-size: cover;
+    background-position: center;
+}
+
+.profile-image {
+    position: absolute;
+    bottom: -50px;
+    left: 20px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 5px solid white;
+}
+
+main {
+    margin-top: 60px;
+}
+
+.user-selection {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.posts, .comments {
+    width: 48%;
+}
+
+.post, .comment {
+    background: #fafafa;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.post:hover, .comment:hover {
+    background: #f5f8fa;
+}
+
+.post h2, .comment h3 {
+    margin: 0 0 10px;
+}
+
+.post p, .comment p {
+    margin: 0;
+}
+
+.comment-icons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: #657786;
+}
+
+.comment-icons div {
+    display: flex;
+    align-items: center;
+}
+
+.comment-icons div span {
+    margin-left: 5px;
+}

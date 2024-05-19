@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter Clone</title>
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="top-nav">
+            <div class="logo">
+                <h1>Twitter Clone</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search Twitter">
+            </div>
+        </nav>
+        <div class="profile-wrapper">
+            <div class="background-image"></div>
+            <img src="https://via.placeholder.com/150" alt="Profile Image" class="profile-image">
+        </div>
+        <main>
+            <div class="user-selection">
+                <label for="userSelect">Select User:</label>
+                <select id="userSelect"></select>
+            </div>
+            <div class="content">
+                <div id="postsContainer" class="posts"></div>
+                <div id="commentsContainer" class="comments"></div>
+            </div>
+        </main>
+    </div>
+    <script src="./index.js"></script>
+</body>
+</html>
