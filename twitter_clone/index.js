@@ -14,19 +14,22 @@ let allComments = [];
 fetch('https://jsonplaceholder.typicode.com/users')
     .then(response => response.json())
     .then(users => {
+        localStorage.setItem("users", JSON.stringify(users));
         users.forEach(user => {
             const option = document.createElement('option');
             option.value = user.id;
-            option.textContent = user.username;
+            option.textContent = user.name;
             userSelect.appendChild(option);
         });
         userSelect.value = 1;
+        localStorage.setItem("userId", 1);
         fetchUserDetails(1);
         fetchPosts(1);
     });
 
 userSelect.addEventListener('change', (event) => {
     const userId = event.target.value;
+    localStorage.setItem("userId", userId);
     fetchUserDetails(userId);
     fetchPosts(userId);
 });
@@ -40,7 +43,7 @@ function fetchUserDetails(userId) {
     fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
         .then(response => response.json())
         .then(user => {
-            userName.textContent = user.name;
+            userName.textContent = user.username;
             userEmail.textContent = user.email;
             userAddress.textContent = `${user.address.street}, ${user.address.city}`;
         });
@@ -66,17 +69,21 @@ function fetchComments(postId) {
 }
 
 function displayPosts(posts) {
+    const user  = JSON.parse(localStorage.getItem("users"))[localStorage.getItem("userId")-1]
     postsContainer.innerHTML = '';
     posts.forEach(post => {
         const postDiv = document.createElement('div');
         postDiv.className = 'post';
         postDiv.innerHTML = `
             <div class="post-header">
-                <span class="username">${post.userId}</span>
+                <small class="username">${user.name}</small>
                 <i class="fas fa-check-circle verified-icon"></i>
                 <i class="fab fa-twitter twitter-icon"></i>
             </div>
-            <h2>${post.title}</h2>
+            <div class="top-wrapper">
+                <img src="https://plus.unsplash.com/premium_photo-1707932485795-1d0aed727376?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHx8" alt="Profile Image" class="post-image">
+                <h2>${post.title}</h2>
+            </div>
             <p>${post.body}</p>`;
         postDiv.addEventListener('click', () => fetchComments(post.id));
         postsContainer.appendChild(postDiv);
