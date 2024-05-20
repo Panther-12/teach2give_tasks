@@ -70,6 +70,7 @@ function fetchComments(postId) {
     fetch(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`)
         .then(response => response.json())
         .then(comments => {
+            console.log(comments)
             allComments = comments;
             displayComments(comments);
         });
@@ -99,6 +100,9 @@ function displayPosts(posts) {
 
 function displayComments(comments) {
     commentsContainer.innerHTML = '';
+    const PostComments = document.createElement('h4');
+    PostComments.textContent = `Post ${comments[0].postId} Comments | Total ${comments.length}`;
+    commentsContainer.appendChild(PostComments);
     comments.forEach(comment => {
         const commentDiv = document.createElement('div');
         commentDiv.className = 'comment';
