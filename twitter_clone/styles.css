@@ -3,6 +3,11 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f0f0f0;
+
+    i{
+        cursor: pointer;
+
+    }
 }
 
 .container {
@@ -74,8 +79,12 @@ body {
 }
 
 .user-details {
-    text-align: center;
     margin-top: 60px;
+    padding: 10px;
+
+    p{
+        padding: 5px;
+    }
 }
 
 .user-details h2 {
@@ -92,8 +101,8 @@ main {
 }
 
 .user-selection {
-    margin-bottom: 60px;
-    margin-top: 20%;
+    margin-bottom: 30px;
+    margin-top: 40%;
 }
 
 label {
@@ -176,4 +185,14 @@ select {
 
 #searchInput{
     padding: 15px;
+}
+
+.loc-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    #userAddress{
+        margin-right: 20px;
+    }
 }

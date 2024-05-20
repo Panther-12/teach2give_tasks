@@ -4,7 +4,10 @@ const commentsContainer = document.getElementById('commentsContainer');
 const searchInput = document.getElementById('searchInput');
 
 const userName = document.getElementById('userName');
+const userUsername = document.getElementById('userUsername');
+const userCatchphrase = document.getElementById('userCatchphrase');
 const userEmail = document.getElementById('userEmail');
+const userWebsite = document.getElementById('userWebsite');
 const userAddress = document.getElementById('userAddress');
 
 let allPosts = [];
@@ -43,9 +46,13 @@ function fetchUserDetails(userId) {
     fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
         .then(response => response.json())
         .then(user => {
-            userName.textContent = user.username;
+            console.log(user)
+            userName.textContent = user.name;
             userEmail.textContent = user.email;
-            userAddress.textContent = `${user.address.street}, ${user.address.city}`;
+            userAddress.textContent = `${user.address.city}`;
+            userWebsite.textContent = user.website;
+            userCatchphrase.textContent = user.company.catchPhrase;
+            userUsername.textContent = user.username;
         });
 }
 
