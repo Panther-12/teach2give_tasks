@@ -171,6 +171,7 @@ body {
   .modal {
     display: none;
     position: fixed;
+    justify-content: center;
     z-index: 1;
     left: 0;
     top: 0;
@@ -188,7 +189,11 @@ body {
   
   .modal-content {
     background-color: #fefefe;
-    margin: 15% auto;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    display: flex;
+    margin: 15% 15% ;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
@@ -197,6 +202,10 @@ body {
     animation-name: animatetop;
     animation-duration: 0.4s;
 
+    button{
+      display: flex;
+      align-items: center;
+    }
     a{
       i{
         color: #ff5722;
