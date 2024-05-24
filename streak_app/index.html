@@ -6,14 +6,16 @@
   <title>My Streak Counter</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <div class="top-container">
     <img class="fan-image" src="./static/images/phonebg.png" alt="Smartwatch">
-    <!-- <img class="fan-image" src="./static/images/phonebg.png" alt="Smartwatch">
-    <img class="fan-image" src="./static/images/phonebg.png" alt="Smartwatch"> -->
     <h1>Welcome to My Streak Counter</h1>
-    <button id="open-modal-btn">Add Habit</button>
+    <div class="buttons-wrapper">
+      <button id="open-modal-btn"><i class="fas fa-plus"></i> Add Habit</button>
+      <button id="history-btn"><i class="fas fa-chart-line"></i> Analysis</button>
+    </div>
   </div>
   <div id="habits-container" class="habits-container"></div>
   
@@ -25,6 +27,30 @@
       <button id="add-habit-btn">Add Habit</button>
     </div>
   </div>
+
+  <div id="history-modal" class="modal">
+    <div class="modal-content">
+      <span id="close-history-modal-btn" class="close">&times;</span>
+      <a href="/streak_app/" class="backtohomelink">
+        <i class="fas fa-home"></i> Back to Home
+      </a>
+      <canvas id="chart-container"></canvas>
+    </div>
+  </div>
+
+  <div id="update-habit-modal" class="modal">
+    <div class="modal-content">
+      <span id="close-update-modal-btn" class="close">&times;</span>
+      <form id="update-habit-form">
+        <label for="update-habit-input">Habit Name</label>
+        <input id="update-habit-input" type="text" required>
+        <label for="update-date-input">Start Date</label>
+        <input id="update-date-input" type="date" required>
+        <button id="update-habit-btn" type="submit">Update Habit</button>
+      </form>
+    </div>
+  </div>
+
   <script src="dist/script.js"></script>
 </body>
 </html>

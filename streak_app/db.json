@@ -1,22 +1,28 @@
 {
   "habits": [
     {
-      "id": 1716524075109,
+      "id": "1716539498272",
       "name": "Gaming",
-      "startDate": "2024-05-21",
-      "icon": "fa-running"
+      "startDate": "2024-05-13",
+      "icon": "fa-biking"
     },
     {
-      "id": 1716524093269,
-      "name": "Smoking",
-      "startDate": "2024-02-05",
+      "id": "1716540908838",
+      "name": "Coding",
+      "startDate": "2024-02-16",
+      "icon": "fa-bed"
+    },
+    {
+      "id": "1716542028915",
+      "name": "Cooking",
+      "startDate": "2024-05-23",
       "icon": "fa-smoking-ban"
     },
     {
-      "id": 1716524108996,
-      "name": "Reading",
-      "startDate": "2023-06-12",
-      "icon": "fa-hamburger"
+      "id": "1716542075981",
+      "name": "Piano",
+      "startDate": "2024-05-22",
+      "icon": "fa-walking"
     }
   ]
 }

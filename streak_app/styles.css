@@ -6,6 +6,10 @@ body {
     flex-direction: column;
     align-items: center;
   }
+
+  button{
+    cursor: pointer;
+  }
   
   .top-container {
     width: 100%;
@@ -45,6 +49,18 @@ body {
     transition: 0.4s ease-in-out;
     cursor: pointer;
   }
+
+    button{
+      background-color: #ff7043;
+      color: white;
+      border: none;
+      transition: 0.4s ease-in-out;
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 10px;
+    
+    }
   
   .top-container button:hover {
     background-color: #ff5722;
@@ -64,7 +80,7 @@ body {
     border: 1px solid #ff5722;
     border-radius: 8px;
     width: 200px;
-    margin: 10px;
+    margin: 30px;
     padding: 20px;
     text-align: center;
     position: relative;
@@ -72,10 +88,30 @@ body {
     transition: 0.4s ease-in-out;
   }
   
+  .habit-actions {
+    position: absolute;
+    margin-top: 80px;
+
+    bottom: -30px; /* adjust as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px; /* space between icons */
+    z-index: 2;
+  }
+  
+  .habit-actions .fas {
+    cursor: pointer;
+    font-size: 15px; /* adjust as needed */
+  }
 
   
   .habit-card img {
     width: 50px;
+  }
+
+  #history-modal{
+    z-index: 20;
   }
   
   .overlay {
@@ -92,6 +128,7 @@ body {
     align-items: center;
     border-radius: 8px;
     opacity: 0; /* Add this line */
+    z-index: 1;
   }
   
   .habit-card:hover .overlay {
@@ -133,25 +170,57 @@ body {
   
   .modal {
     display: none;
-    transition: 0.4s ease-in-out;
     position: fixed;
     z-index: 1;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-    justify-content: center;
-    align-items: center;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+  }
+
+  .chart-container {
+    max-width: 100%;
+    height: auto;
+    overflow: auto;
   }
   
   .modal-content {
-    background-color: white;
+    background-color: #fefefe;
+    margin: 15% auto;
     padding: 20px;
-    border-radius: 8px;
-    width: 300px;
-    display: flex;
-    flex-direction: column;
+    border: 1px solid #888;
+    width: 80%;
+    height: fit-content;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+
+    a{
+      i{
+        color: #ff5722;
+      }
+    }
+  }
+  
+  @keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+  }
+
+  .modal-header {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+  }
+  
+  .modal-body {padding: 2px 16px;}
+  
+  .modal-footer {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
   }
   
   .modal-content input {
@@ -175,8 +244,9 @@ body {
     background-color: #ff5722;
   }
   
+
   .close {
-    color: #aaa;
+    color: white;
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -184,11 +254,47 @@ body {
   
   .close:hover,
   .close:focus {
-    color: black;
+    color: #000;
     text-decoration: none;
     cursor: pointer;
   }
+
+  .buttons-wrapper {
+    button{
+      border: 1px solid white;
+      transition: 0.3s ease-in-out;
+      border-radius: 8px;
+      i{
+        margin-right: 10px;
+      }
+    }
+
+    button:hover{
+      border: none;
+    }
+
+    button:nth-child(2){
+      margin-left: 30px;
+    }
+  }
   
+  .backtohomelink {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.backtohomelink:hover {
+  color: #ff7043;
+}
+
+
+.backtohomelink i {
+  margin-right: 8px;
+}
   @media (max-width: 600px) {
     .habit-card {
       width: 100%;
@@ -199,6 +305,12 @@ body {
     }
   }
   
+
+  @media screen and (max-width: 700px){
+    .modal-content {
+      width: 100%;
+    }
+  }
 
   @media (max-width: 1200px) {
     .top-container img {
