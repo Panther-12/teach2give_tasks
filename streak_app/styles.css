@@ -156,15 +156,15 @@ body {
   .neon-text {
     font-size: 24px;
     transition: 0.4s ease-in-out;
-    color: #ff9e00; /* Main neon orange color */
+    color: #ff9e00; 
     text-shadow: 
-      0 0 5px #ff9e00,    /* Smaller shadow */
-      0 0 10px #ff9e00,   /* Larger shadow */
-      0 0 20px #ff9e00,   /* Even larger shadow */
-      0 0 40px #ff9e00,   /* Largest shadow */
-      0 0 80px #ff9e00,   /* Extra large shadow */
-      0 0 90px #ff9e00,   /* More extended shadow */
-      0 0 100px #ff9e00;  /* Maximum extended shadow */
+      0 0 5px #ff9e00,   
+      0 0 10px #ff9e00, 
+      0 0 20px #ff9e00,
+      0 0 40px #ff9e00,  
+      0 0 80px #ff9e00,
+      0 0 90px #ff9e00,
+      0 0 100px #ff9e00;
   }   
   
   
