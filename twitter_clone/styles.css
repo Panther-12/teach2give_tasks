@@ -73,6 +73,20 @@ body {
     padding: 20px;
 }
 
+.post-header{
+    img{
+        width: 27px;
+        height: 20px;
+        border-radius: 50%;
+    }
+
+    i{
+        background-color: #1da1f2;
+        color: white;
+        padding: 2px;
+    }
+}
+
 .top-wrapper{
     display: flex;
     align-items:center;
@@ -149,9 +163,13 @@ select {
 
 .post{
     cursor: pointer;
+    transition: box-shadow 0.3s ease-in-out;
 }
 .post:hover{
     box-shadow: 0 0 5px rgba(0,0,0,0.4);
+}
+.post:visited{
+    color: #1da1f2;
 }
 .comment-icons {
     display: flex;
@@ -185,10 +203,6 @@ select {
     margin-right: 5px;
 }
 
-.post-header .twitter-icon {
-    color: #1da1f2;
-}
-
 #searchInput{
     padding: 15px;
 }
@@ -201,4 +215,25 @@ select {
     #userAddress{
         margin-right: 20px;
     }
+}
+
+@media screen and (max-width: 600px) {
+    .content {
+        flex-direction: column;
+    }
+
+    .posts, .comments {
+        width: 100%;
+    }
+
+
+    .profile-wrapper {
+        height: 200px;
+    }
+
+    .profile-image {
+        width: 80px;
+        height: 80px;
+    }
+    
 }

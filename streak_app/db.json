@@ -1,0 +1,22 @@
+{
+  "habits": [
+    {
+      "id": 1716524075109,
+      "name": "Gaming",
+      "startDate": "2024-05-21",
+      "icon": "fa-running"
+    },
+    {
+      "id": 1716524093269,
+      "name": "Smoking",
+      "startDate": "2024-02-05",
+      "icon": "fa-smoking-ban"
+    },
+    {
+      "id": 1716524108996,
+      "name": "Reading",
+      "startDate": "2023-06-12",
+      "icon": "fa-hamburger"
+    }
+  ]
+}

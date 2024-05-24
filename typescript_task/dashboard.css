@@ -1,0 +1,263 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.top-nav h1 {
+    color: #ff6600;
+}
+
+.top-nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.top-nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.top-nav ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.sidebar {
+    width: 200px;
+    float: left;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.main-content {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chart-card {
+    flex-basis: calc(33.33% - 20px); /* Adjust card width */
+    max-width: 300px;
+    height: 300px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
+    margin-bottom: 20px;
+    overflow: hidden; /* Ensure content doesn't overflow */
+    position: relative; /* For absolute positioning of canvas */
+}
+
+.chart-card:last-child {
+    margin-right: 0;
+}
+
+.chart-card h2 {
+    color: #ff6600;
+    margin-bottom: 10px;
+}
+
+/* Additional Styling for Cool Effects */
+
+.chart-card:hover {
+    transform: translateY(-5px);
+    transition: transform 0.3s ease;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.chart-card canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box; /* Ensure canvas fits within 300px by 300px */
+    padding: 20px; /* Adjust padding to fit chart within card */
+    background-color: #fff; /* Ensure canvas background matches card background */
+}
+
+/* Add styling for user history */
+#userHistoryChartCard {
+    display: none; /* Initially hide user history */
+}
+
+/* Add hover effect for menu items */
+.sidebar ul li:hover {
+    cursor: pointer;
+    background-color: #f0f0f0;
+}
+
+/* Table styles */
+.main-content table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.main-content th,
+.main-content td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.main-content th {
+    background-color: #ff6600;
+    color: #fff;
+}
+
+.main-content tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.main-content tbody tr:hover {
+    background-color: #ddd;
+}
+
+/* Add this to your existing dashboard.css file */
+
+.chart-card.active-chart {
+    width: 400px;
+    height: 400px;
+}
+
+/* Additional styling for the active chart */
+.chart-card.active-chart:hover {
+    transform: translateY(-5px);
+    transition: transform 0.3s ease;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+/* form {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+} */
+
+/* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: slideDown 0.4s ease-out;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 8px;
+    position: relative;
+}
+
+@keyframes slideDown {
+    from {
+        top: -100%;
+    }
+    to {
+        top: 0;
+    }
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+}
+
+button {
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #e65500;
+}
+
+form div {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+input[type="text"],
+input[type="date"],
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+select:focus {
+    border-color: #ff6600;
+    box-shadow: 0 0 5px rgba(255, 102, 0, 0.5);
+    outline: none;
+}
+
+/* Responsive table */
+@media (max-width: 600px) {
+    .main-content table {
+        overflow-x: auto;
+    }
+}

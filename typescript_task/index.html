@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bad Habits Streak Counter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">BH</div>
+        <h1>Bad Habits Streak Counter</h1>
+    </header>
+    <main>
+        <section class="counter-section">
+            <div class="counter-container">
+                <div class="streak-info">
+                    <h2>Your Current Streak</h2>
+                    <div class="streak-count" id="streakCount">0</div>
+                </div>
+                <button class="reset-button" onclick="resetStreak()">Reset Streak</button>
+            </div>
+        </section>
+        <section class="dashboard-section" id="dashboardSection">
+            <h2>Dashboard</h2>
+            <div class="dashboard-container" id="dashboardContainer">
+                <!-- Stats will be dynamically populated here -->
+            </div>
+        </section>
+        <section class="habit-history-section" id="habitHistorySection">
+            <h2>Habit History</h2>
+            <div class="habit-history-container" id="habitHistoryContainer">
+                <!-- Habit history will be dynamically populated here -->
+            </div>
+        </section>
+        <section class="user-profile-section" id="userProfileSection">
+            <h2>User Profile</h2>
+            <div class="user-profile-container" id="userProfileContainer">
+                <!-- User profile details will be dynamically populated here -->
+            </div>
+        </section>
+        <section class="motivation-section" id="motivationSection">
+            <h2>Motivational Messages</h2>
+            <div class="motivation-container" id="motivationContainer">
+                <!-- Motivational messages will be dynamically populated here -->
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Bad Habits Streak Counter. All rights reserved.</p>
+    </footer>
+
+    <script>var exports = {};</script>
+    <script src="./src/main.js"></script>
+</body>
+</html>

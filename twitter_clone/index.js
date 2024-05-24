@@ -46,7 +46,7 @@ function fetchUserDetails(userId) {
     fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
         .then(response => response.json())
         .then(user => {
-            console.log(user)
+            // console.log(user)
             userName.textContent = user.name;
             userEmail.textContent = user.email;
             userAddress.textContent = `${user.address.city}`;
@@ -70,7 +70,7 @@ function fetchComments(postId) {
     fetch(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`)
         .then(response => response.json())
         .then(comments => {
-            console.log(comments)
+            // console.log(comments)
             allComments = comments;
             displayComments(comments);
         });
@@ -85,7 +85,7 @@ function displayPosts(posts) {
         postDiv.innerHTML = `
             <div class="post-header">
                 <small class="username">${user.name}</small>
-                <i class="fas fa-check-circle verified-icon"></i>
+                <img src="./static/images/verified.png" alt="twitter verified icon" class="verified-icon"/>
                 <i class="fab fa-twitter twitter-icon"></i>
             </div>
             <div class="top-wrapper">
@@ -127,3 +127,47 @@ function filterContent(query) {
     displayPosts(filteredPosts);
     displayComments(filteredComments);
 }
+
+
+// // Gradient color switch
+// let degree = 0;
+// function changeGradient() {
+//     degree = (degree + 1) % 360;
+//     document.body.style.background = `linear-gradient(${degree}deg, #9C27B0, #673AB7, #3F51B5, #2196F3, #03A9F4, #00BCD4)`;
+// }
+// setInterval(changeGradient, 100);
+
+// // Music visualizer
+// const audio = new Audio('./static/audio/soul_amapiano.mp3');
+// const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+// const analyser = audioContext.createAnalyser();
+// const source = audioContext.createMediaElementSource(audio);
+// source.connect(analyser);
+// analyser.connect(audioContext.destination);
+
+// const canvas = document.createElement('canvas');
+// canvas.width = window.innerWidth;
+// canvas.height = window.innerHeight;
+// document.body.appendChild(canvas);
+
+// const context = canvas.getContext('2d');
+// const bufferLength = analyser.frequencyBinCount;
+// const dataArray = new Uint8Array(bufferLength);
+
+// function draw() {
+//     requestAnimationFrame(draw);
+//     analyser.getByteFrequencyData(dataArray);
+//     context.fillStyle = 'rgba(0, 0, 0, 0.1)';
+//     context.fillRect(0, 0, canvas.width, canvas.height);
+//     const barWidth = (canvas.width / bufferLength) * 2.5;
+//     let x = 0;
+//     for (let i = 0; i < bufferLength; i++) {
+//         const barHeight = dataArray[i] / 2;
+//         context.fillStyle = `rgb(${barHeight}, ${barHeight / 2}, ${255 - barHeight})`;
+//         context.fillRect(x, canvas.height - barHeight / 2, barWidth, barHeight);
+//         x += barWidth + 1;
+//     }
+// }
+// draw();
+
+// audio.play();

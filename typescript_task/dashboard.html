@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="./dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <nav class="top-nav">
+            <h1>Dashboard</h1>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Settings</a></li>
+                <!-- Add more menu items as needed -->
+            </ul>
+        </nav>
+        <div class="sidebar">
+            <ul>
+                <li><a href="#totalHabits">Total Habits</a></li>
+                <li><a href="#userHistory">User History</a></li>
+                <li><a href="#longestStreak">Longest Streak</a></li>
+                <li><a href="#currentStreak">Current Streak</a></li>
+                <li><a href="#habitsPerCategory">Habits per Category</a></li>
+                <button id="addHabitButton">Add Habit</button>
+                <!-- Add more menu options as needed -->
+            </ul>
+        </div>
+        <div class="main-content">
+            <div class="chart-card">
+                <h2 id="totalHabits">Total Habits</h2>
+                <canvas id="totalHabitsChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h2 id="habitComparison">Habit Comparison</h2>
+                <canvas id="habitComparisonChart"></canvas>
+            </div>
+
+            <div class="chart-card">
+                <h2 id="longestStreak">Longest Streak</h2>
+                <canvas id="longestStreakChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h2 id="currentStreak">Current Streak</h2>
+                <canvas id="currentStreakChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h2 id="habitsPerCategory">Habits per Category</h2>
+                <canvas id="habitsPerCategoryChart"></canvas>
+            </div>            
+            <div class="chart-card" id="userHistoryChartCard">
+                <h2 id="userHistory">User History</h2>
+                <!-- User history will be displayed here -->
+            </div>
+            <!-- Add more chart cards as needed -->
+        </div>
+    </div>
+        <!-- Modal Structure -->
+        <div id="habitModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h2 id="modalTitle">Add Habit</h2>
+                <form id="habitForm">
+                    <input type="hidden" id="habitId">
+                    <div>
+                        <label for="userId">User</label>
+                        <select id="userId" required></select>
+                    </div>
+                    <div>
+                        <label for="name">Habit Name</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div>
+                        <label for="startDate">Start Date</label>
+                        <input type="date" id="startDate" required>
+                    </div>
+                    <div>
+                        <label for="endDate">End Date</label>
+                        <input type="date" id="endDate">
+                    </div>
+                    <button type="submit">Save</button>
+                </form>
+            </div>
+        </div>
+    <script src="./src/dashboard.js"></script>
+</body>
+</html>
