@@ -11,10 +11,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 const productForm = document.getElementById("product-form");
 const productList = document.getElementById("product-list");
 const modal = document.getElementById("modal");
-const openModalButton = document.querySelector(".bg-indigo-600");
+const openModalButton = document.getElementById("open-modal");
 const closeModalButton = document.getElementById("close-modal");
 const modalTitle = document.getElementById("modal-title");
 const searchInput = document.getElementById("search-input");
+const pagination = document.getElementById("pagination");
+let currentPage = 1;
+const itemsPerPage = 6;
+let products = [];
 openModalButton.addEventListener("click", () => {
     modalTitle.textContent = "Add New Game";
     document.getElementById("product-id").value = "";
@@ -25,7 +29,11 @@ closeModalButton.addEventListener("click", () => {
     modal.classList.add("hidden");
 });
 productForm.addEventListener("submit", handleFormSubmit);
-searchInput.addEventListener("input", handleSearch);
+searchInput.addEventListener("input", () => {
+    currentPage = 1;
+    renderProducts();
+});
+// Handle form submit function
 function handleFormSubmit(event) {
     return __awaiter(this, void 0, void 0, function* () {
         event.preventDefault();
@@ -41,40 +49,96 @@ function handleFormSubmit(event) {
         else {
             yield createProduct(product);
         }
-        closeModalButton.click(); // Close the modal after form submission
+        closeModalButton.click();
         yield loadProducts();
     });
 }
+// Load products function
 function loadProducts() {
-    return __awaiter(this, arguments, void 0, function* (query = "") {
+    return __awaiter(this, void 0, void 0, function* () {
         const response = yield fetch("http://localhost:3000/products");
-        const products = yield response.json();
-        const filteredProducts = products.filter(product => product.name.toLowerCase().includes(query.toLowerCase()));
-        productList.innerHTML = "";
-        filteredProducts.forEach(product => {
-            var _a, _b;
-            const li = document.createElement("li");
-            li.className = "bg-white rounded-lg shadow-md p-4 flex flex-col";
-            li.innerHTML = `
+        products = yield response.json();
+        renderProducts();
+    });
+}
+// Render products function
+function renderProducts() {
+    const searchQuery = searchInput.value.toLowerCase();
+    const filteredProducts = products.filter(product => product.name.toLowerCase().includes(searchQuery));
+    const paginatedProducts = paginate(filteredProducts, currentPage, itemsPerPage);
+    // Clear the product list before rendering
+    productList.innerHTML = "";
+    // Render products for the current page
+    paginatedProducts.forEach(product => {
+        var _a, _b;
+        const li = document.createElement("li");
+        li.className = "bg-white rounded-lg shadow-md p-4 flex flex-col";
+        li.innerHTML = `
             <img src="${product.imageUrl}" alt="${product.name}" class="w-full h-48 object-cover mb-4 rounded-md">
             <h3 class="text-xl font-semibold mb-2">${product.name}</h3>
             <p class="text-gray-700 mb-2">$${product.price}</p>
             <p class="text-gray-700 mb-4">${product.description}</p>
             <div class="flex justify-between">
-                <button class="py-2 px-4 bg-red-600 text-white rounded-md hover:bg-red-700" data-id="${product.id}">Delete</button>
-                <button class="py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700" data-id="${product.id}">Edit</button>
+                <button class="py-2 px-4 bg-red-600 text-white rounded-md hover:bg-red-700" data-id="${product.id}" onclick="deleteProduct('${product.id}')">Delete</button>
+                <button class="py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700" data-id="${product.id}" onclick="editProduct('${product.id}')">Edit</button>
             </div>
         `;
-            productList.appendChild(li);
-            (_a = li.querySelector('button[data-id][class*="bg-red-600"]')) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
-                deleteProduct(product.id);
-            });
-            (_b = li.querySelector('button[data-id][class*="bg-blue-600"]')) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => {
-                editProduct(product.id);
-            });
+        productList.appendChild(li);
+        (_a = li.querySelector('button[data-id][class*="bg-red-600"]')) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
+            deleteProduct(product.id);
+        });
+        (_b = li.querySelector('button[data-id][class*="bg-blue-600"]')) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => {
+            editProduct(product.id);
         });
     });
+    // Render pagination controls
+    renderPagination(filteredProducts.length);
 }
+// Paginate function
+function paginate(array, currentPage, itemsPerPage) {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    return array.slice(startIndex, startIndex + itemsPerPage);
+}
+// Render pagination function
+function renderPagination(totalItems) {
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    // Clear previous pagination buttons
+    pagination.innerHTML = "";
+    // Render previous page button
+    const prevButton = document.createElement("button");
+    prevButton.textContent = "Previous";
+    prevButton.className = "bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-md shadow-md mr-2";
+    prevButton.addEventListener("click", () => {
+        if (currentPage > 1) {
+            currentPage--;
+            renderProducts();
+        }
+    });
+    pagination.appendChild(prevButton);
+    // Render page numbers
+    for (let i = 1; i <= totalPages; i++) {
+        const pageButton = document.createElement("button");
+        pageButton.textContent = i.toString();
+        pageButton.className = currentPage === i ? "bg-indigo-600 text-white py-2 px-4 rounded-md shadow-md mx-1" : "bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-md shadow-md mx-1";
+        pageButton.addEventListener("click", () => {
+            currentPage = i;
+            renderProducts();
+        });
+        pagination.appendChild(pageButton);
+    }
+    // Render next page button
+    const nextButton = document.createElement("button");
+    nextButton.textContent = "Next";
+    nextButton.className = "bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-md shadow-md ml-2";
+    nextButton.addEventListener("click", () => {
+        if (currentPage < totalPages) {
+            currentPage++;
+            renderProducts();
+        }
+    });
+    pagination.appendChild(nextButton);
+}
+// Create product function
 function createProduct(product) {
     return __awaiter(this, void 0, void 0, function* () {
         yield fetch("http://localhost:3000/products", {
@@ -86,6 +150,7 @@ function createProduct(product) {
         });
     });
 }
+// Update product function
 function updateProduct(id, product) {
     return __awaiter(this, void 0, void 0, function* () {
         yield fetch(`http://localhost:3000/products/${id}`, {
@@ -97,6 +162,7 @@ function updateProduct(id, product) {
         });
     });
 }
+// Delete product function
 function deleteProduct(id) {
     return __awaiter(this, void 0, void 0, function* () {
         yield fetch(`http://localhost:3000/products/${id}`, {
@@ -105,11 +171,12 @@ function deleteProduct(id) {
         yield loadProducts();
     });
 }
+// Edit product function
 function editProduct(id) {
     return __awaiter(this, void 0, void 0, function* () {
         const response = yield fetch(`http://localhost:3000/products/${id}`);
         const product = yield response.json();
-        document.getElementById("product-id").value = product.id;
+        document.getElementById("product-id").value = product.id.toString();
         document.getElementById("name").value = product.name;
         document.getElementById("price").value = product.price.toString();
         document.getElementById("description").value = product.description;
@@ -118,8 +185,5 @@ function editProduct(id) {
         modal.classList.remove("hidden");
     });
 }
-function handleSearch(event) {
-    const query = event.target.value;
-    loadProducts(query);
-}
+// Runs on document load to ensure the products are loaded
 loadProducts();
