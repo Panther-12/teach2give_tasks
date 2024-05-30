@@ -28,8 +28,8 @@ class HabitTracker {
 
   private fontAwesomeIcons: string[];
 
-  constructor() {
-    this.habitInput = document.getElementById('habit-input') as HTMLInputElement;
+  constructor(habitInput: HTMLInputElement) {
+    this.habitInput = habitInput;
     this.dateInput = document.getElementById('date-input') as HTMLInputElement;
     this.addHabitBtn = document.getElementById('add-habit-btn') as HTMLButtonElement;
     this.habitsContainer = document.getElementById('habits-container') as HTMLDivElement;
@@ -124,12 +124,10 @@ class HabitTracker {
     const response = await fetch('http://localhost:3001/habits');
     const habits: Habit[] = await response.json();
 
-    // Calculate the necessary values for the charts
     const habitNames = habits.map(habit => habit.name);
     const habitDurations = habits.map(habit => this.calculateDays(habit.startDate).value);
     console.log(habitDurations);
 
-    // Create the charts
     new Chart(this.chartContainer, {
       type: 'bar',
       data: {
@@ -178,7 +176,7 @@ class HabitTracker {
   private async addHabit() {
     const startDate = new Date(this.dateInput.value);
     const now = new Date();
-    now.setHours(0, 0, 0, 0); // Set the time to 00:00:00 for accurate comparison
+    now.setHours(0, 0, 0, 0); 
   
     if (startDate > now) {
       alert('Start date cannot be in the future');
@@ -263,4 +261,6 @@ class HabitTracker {
   }
 }
 
-new HabitTracker();
+const habitInput = document.getElementById('habit-input') as HTMLInputElement;
+
+new HabitTracker(habitInput);
