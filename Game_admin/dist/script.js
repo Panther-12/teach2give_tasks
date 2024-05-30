@@ -8,6 +8,46 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+// Function to show success notification
+function showSuccessNotification(message) {
+    const notification = document.getElementById("notification");
+    const notificationMessage = document.getElementById("notification-message");
+    if (notification && notificationMessage) {
+        notification.classList.remove("hidden");
+        notification.classList.remove("bg-red-500");
+        notification.classList.add("bg-green-500");
+        notificationMessage.textContent = message;
+        setTimeout(() => {
+            hideNotification();
+        }, 3000); // Hide notification after 3 seconds
+    }
+}
+// Function to show error notification
+function showErrorNotification(message) {
+    const notification = document.getElementById("notification");
+    const notificationMessage = document.getElementById("notification-message");
+    if (notification && notificationMessage) {
+        notification.classList.remove("hidden");
+        notification.classList.remove("bg-green-500");
+        notification.classList.add("bg-red-500");
+        notificationMessage.textContent = message;
+    }
+}
+// Function to hide notification
+function hideNotification() {
+    const notification = document.getElementById("notification");
+    if (notification) {
+        notification.classList.add("hidden");
+    }
+}
+// Event listener to close notification
+const closeNotificationButton = document.getElementById("close-notification");
+if (closeNotificationButton) {
+    closeNotificationButton.addEventListener("click", () => {
+        hideNotification();
+    });
+}
+// Get elements from the DOM
 const productForm = document.getElementById("product-form");
 const productList = document.getElementById("product-list");
 const modal = document.getElementById("modal");
@@ -16,15 +56,18 @@ const closeModalButton = document.getElementById("close-modal");
 const modalTitle = document.getElementById("modal-title");
 const searchInput = document.getElementById("search-input");
 const pagination = document.getElementById("pagination");
+// Initialize variables
 let currentPage = 1;
 const itemsPerPage = 6;
 let products = [];
+// Open modal button event listener
 openModalButton.addEventListener("click", () => {
     modalTitle.textContent = "Add New Game";
     document.getElementById("product-id").value = "";
     productForm.reset();
     modal.classList.remove("hidden");
 });
+// Close modal button event listener
 closeModalButton.addEventListener("click", () => {
     modal.classList.add("hidden");
 });
@@ -79,15 +122,21 @@ function renderProducts() {
             <p class="text-gray-700 mb-2">$${product.price}</p>
             <p class="text-gray-700 mb-4">${product.description}</p>
             <div class="flex justify-between">
-                <button class="py-2 px-4 bg-red-600 text-white rounded-md hover:bg-red-700" data-id="${product.id}" onclick="deleteProduct('${product.id}')">Delete</button>
-                <button class="py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700" data-id="${product.id}" onclick="editProduct('${product.id}')">Edit</button>
+                <!-- Delete Icon -->
+                <button class="delete text-red-600 p-2 rounded-full" data-id="${product.id}" onclick="deleteProduct('${product.id}')">
+                    <i class="fas fa-trash"></i>
+                </button>
+                <!-- Edit Icon -->
+                <button class="edit text-indigo-600 p-2 rounded-full" data-id="${product.id}" onclick="editProduct('${product.id}')">
+                    <i class="fas fa-edit"></i>
+                </button>
             </div>
         `;
         productList.appendChild(li);
-        (_a = li.querySelector('button[data-id][class*="bg-red-600"]')) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
+        (_a = li.querySelector('button[data-id][class*="delete"]')) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
             deleteProduct(product.id);
         });
-        (_b = li.querySelector('button[data-id][class*="bg-blue-600"]')) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => {
+        (_b = li.querySelector('button[data-id][class*="edit"]')) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => {
             editProduct(product.id);
         });
     });
@@ -160,6 +209,7 @@ function updateProduct(id, product) {
             },
             body: JSON.stringify(product)
         });
+        showSuccessNotification("Product updated successfully!");
     });
 }
 // Delete product function
@@ -169,6 +219,7 @@ function deleteProduct(id) {
             method: "DELETE"
         });
         yield loadProducts();
+        showSuccessNotification("Product deleted successfully!");
     });
 }
 // Edit product function

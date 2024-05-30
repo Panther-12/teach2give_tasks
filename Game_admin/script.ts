@@ -6,6 +6,54 @@ type Product = {
     imageUrl: string;
 };
 
+// Define types
+type NotificationElement = HTMLElement | null;
+
+// Function to show success notification
+function showSuccessNotification(message: string) {
+    const notification: NotificationElement = document.getElementById("notification");
+    const notificationMessage: HTMLElement | null = document.getElementById("notification-message");
+    if (notification && notificationMessage) {
+        notification.classList.remove("hidden");
+        notification.classList.remove("bg-red-500");
+        notification.classList.add("bg-green-500");
+        notificationMessage.textContent = message;
+        setTimeout(() => {
+            hideNotification();
+        }, 3000); // Hide notification after 3 seconds
+    }
+}
+
+// Function to show error notification
+function showErrorNotification(message: string) {
+    const notification: NotificationElement = document.getElementById("notification");
+    const notificationMessage: HTMLElement | null = document.getElementById("notification-message");
+    if (notification && notificationMessage) {
+        notification.classList.remove("hidden");
+        notification.classList.remove("bg-green-500");
+        notification.classList.add("bg-red-500");
+        notificationMessage.textContent = message;
+    }
+}
+
+// Function to hide notification
+function hideNotification() {
+    const notification: NotificationElement = document.getElementById("notification");
+    if (notification) {
+        notification.classList.add("hidden");
+    }
+}
+
+// Event listener to close notification
+const closeNotificationButton: NotificationElement = document.getElementById("close-notification");
+if (closeNotificationButton) {
+    closeNotificationButton.addEventListener("click", () => {
+        hideNotification();
+    });
+}
+
+
+// Get elements from the DOM
 const productForm = document.getElementById("product-form") as HTMLFormElement;
 const productList = document.getElementById("product-list") as HTMLUListElement;
 const modal = document.getElementById("modal") as HTMLDivElement;
@@ -15,10 +63,12 @@ const modalTitle = document.getElementById("modal-title") as HTMLHeadingElement;
 const searchInput = document.getElementById("search-input") as HTMLInputElement;
 const pagination = document.getElementById("pagination") as HTMLDivElement;
 
+// Initialize variables
 let currentPage = 1;
 const itemsPerPage = 6;
 let products: Product[] = [];
 
+// Open modal button event listener
 openModalButton.addEventListener("click", () => {
     modalTitle.textContent = "Add New Game";
     (document.getElementById("product-id") as HTMLInputElement).value = "";
@@ -26,6 +76,7 @@ openModalButton.addEventListener("click", () => {
     modal.classList.remove("hidden");
 });
 
+// Close modal button event listener
 closeModalButton.addEventListener("click", () => {
     modal.classList.add("hidden");
 });
@@ -88,17 +139,23 @@ function renderProducts() {
             <p class="text-gray-700 mb-2">$${product.price}</p>
             <p class="text-gray-700 mb-4">${product.description}</p>
             <div class="flex justify-between">
-                <button class="py-2 px-4 bg-red-600 text-white rounded-md hover:bg-red-700" data-id="${product.id}" onclick="deleteProduct('${product.id}')">Delete</button>
-                <button class="py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700" data-id="${product.id}" onclick="editProduct('${product.id}')">Edit</button>
+                <!-- Delete Icon -->
+                <button class="delete text-red-600 p-2 rounded-full" data-id="${product.id}" onclick="deleteProduct('${product.id}')">
+                    <i class="fas fa-trash"></i>
+                </button>
+                <!-- Edit Icon -->
+                <button class="edit text-indigo-600 p-2 rounded-full" data-id="${product.id}" onclick="editProduct('${product.id}')">
+                    <i class="fas fa-edit"></i>
+                </button>
             </div>
         `;
         productList.appendChild(li);
 
-        li.querySelector('button[data-id][class*="bg-red-600"]')?.addEventListener("click", () => {
+        li.querySelector('button[data-id][class*="delete"]')?.addEventListener("click", () => {
             deleteProduct(product.id!);
         });
 
-        li.querySelector('button[data-id][class*="bg-blue-600"]')?.addEventListener("click", () => {
+        li.querySelector('button[data-id][class*="edit"]')?.addEventListener("click", () => {
             editProduct(product.id!);
         });
     });
@@ -177,6 +234,7 @@ async function updateProduct(id: string, product: Product) {
         },
         body: JSON.stringify(product)
     });
+    showSuccessNotification("Product updated successfully!");
 }
 
 // Delete product function
@@ -185,6 +243,7 @@ async function deleteProduct(id: string) {
         method: "DELETE"
     });
     await loadProducts();
+    showSuccessNotification("Product deleted successfully!");
 }
 
 // Edit product function
