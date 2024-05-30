@@ -14,6 +14,7 @@ const modal = document.getElementById("modal");
 const openModalButton = document.querySelector(".bg-indigo-600");
 const closeModalButton = document.getElementById("close-modal");
 const modalTitle = document.getElementById("modal-title");
+const searchInput = document.getElementById("search-input");
 openModalButton.addEventListener("click", () => {
     modalTitle.textContent = "Add New Game";
     document.getElementById("product-id").value = "";
@@ -24,6 +25,7 @@ closeModalButton.addEventListener("click", () => {
     modal.classList.add("hidden");
 });
 productForm.addEventListener("submit", handleFormSubmit);
+searchInput.addEventListener("input", handleSearch);
 function handleFormSubmit(event) {
     return __awaiter(this, void 0, void 0, function* () {
         event.preventDefault();
@@ -44,11 +46,12 @@ function handleFormSubmit(event) {
     });
 }
 function loadProducts() {
-    return __awaiter(this, void 0, void 0, function* () {
+    return __awaiter(this, arguments, void 0, function* (query = "") {
         const response = yield fetch("http://localhost:3000/products");
         const products = yield response.json();
+        const filteredProducts = products.filter(product => product.name.toLowerCase().includes(query.toLowerCase()));
         productList.innerHTML = "";
-        products.forEach(product => {
+        filteredProducts.forEach(product => {
             var _a, _b;
             const li = document.createElement("li");
             li.className = "bg-white rounded-lg shadow-md p-4 flex flex-col";
@@ -114,5 +117,9 @@ function editProduct(id) {
         modalTitle.textContent = "Edit Game";
         modal.classList.remove("hidden");
     });
+}
+function handleSearch(event) {
+    const query = event.target.value;
+    loadProducts(query);
 }
 loadProducts();

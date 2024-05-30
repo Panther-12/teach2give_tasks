@@ -12,6 +12,7 @@ const modal = document.getElementById("modal") as HTMLDivElement;
 const openModalButton = document.querySelector(".bg-indigo-600") as HTMLButtonElement;
 const closeModalButton = document.getElementById("close-modal") as HTMLButtonElement;
 const modalTitle = document.getElementById("modal-title") as HTMLHeadingElement;
+const searchInput = document.getElementById("search-input") as HTMLInputElement;
 
 openModalButton.addEventListener("click", () => {
     modalTitle.textContent = "Add New Game";
@@ -25,6 +26,7 @@ closeModalButton.addEventListener("click", () => {
 });
 
 productForm.addEventListener("submit", handleFormSubmit);
+searchInput.addEventListener("input", handleSearch);
 
 async function handleFormSubmit(event: Event) {
     event.preventDefault();
@@ -47,12 +49,13 @@ async function handleFormSubmit(event: Event) {
     await loadProducts();
 }
 
-async function loadProducts() {
+async function loadProducts(query: string = "") {
     const response = await fetch("http://localhost:3000/products");
     const products: Product[] = await response.json();
+    const filteredProducts = products.filter(product => product.name.toLowerCase().includes(query.toLowerCase()));
 
     productList.innerHTML = "";
-    products.forEach(product => {
+    filteredProducts.forEach(product => {
         const li = document.createElement("li");
         li.className = "bg-white rounded-lg shadow-md p-4 flex flex-col";
         li.innerHTML = `
@@ -117,5 +120,11 @@ async function editProduct(id: string) {
     modalTitle.textContent = "Edit Game";
     modal.classList.remove("hidden");
 }
+
+function handleSearch(event: Event) {
+    const query = (event.target as HTMLInputElement).value;
+    loadProducts(query);
+}
+
 
 loadProducts();
