@@ -1,120 +1,364 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GameHub Admin Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./styles.css">
+    <title>GameHub - Your Ultimate Gaming Destination</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f4f6;
+            color: #374151;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        /* Header Section */
+        header {
+            background-color: #4b5563;
+            color: #fff;
+            padding: 20px 0;
+            height: 300px;
+            text-align: center;
+            background: url('https://media.istockphoto.com/id/1396079593/photo/gamepad-and-headphones-with-copy-space-3d-render.jpg?s=1024x1024&w=is&k=20&c=PNwuCsEKiyz4Z5A7KjXuTVEQl3iGXoQgCYTqOcfB6Hs=') no-repeat center center/cover;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        header .container{
+            margin-top: 7%;
+        }
+
+        /* Features Section */
+        .features {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .feature {
+            flex: 1;
+            text-align: center;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature i {
+            font-size: 3rem;
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+
+        .feature h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            font-size: 1rem;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            text-align: center;
+            margin-top: 50px;
+            padding: 40px 0;
+            background-color: #edf2f7;
+        }
+
+        .testimonial {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .testimonial p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-author {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .price {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .price-description {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .pricing-options {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .pricing-option {
+            flex: 1;
+            padding: 30px;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .pricing-option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .pricing-option h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .pricing-option p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .pricing-option button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: 500;
+            border: none;
+            border-radius: 30px;
+            background-color: #6366f1;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .pricing-option button:hover {
+            background-color: #4f46e5;
+        }
+
+        /* Team Section */
+        .team {
+            text-align: center;
+            margin-top: 10%;
+            margin-bottom: 50px;
+
+            h2{
+                margin-bottom: 30px;
+            }
+        }
+
+        .team-member {
+            margin-bottom: 40px;
+        }
+
+        .team-members{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 70%;
+            gap: 30px;
+            margin-left: 15%;
+        }
+
+        .team-member img {
+            border-radius: 50%;
+            width: 150px;
+        }
+
+        .team-member>img:nth-child(3) {
+            width: 200px !important;
+        }
+
+        .team-member h3 {
+            font-size: 1.5rem;
+            margin-top: 10px;
+        }
+
+        .team-member p {
+            font-size: 1.2rem;
+        }
+/* Footer Section */
+footer {
+            background-color: #4b5563;
+            color: #fff;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #cbd5e0;
+        }
+                /* CTA Section */
+                .cta {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .cta button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: 500;
+            border: none;
+            border-radius: 30px;
+            background-color: #6366f1;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+            a{
+                text-decoration: none;
+                color: white;
+            }
+        }
+
+        .cta button:hover {
+            background-color: #4f46e5;
+        }
+
+    </style>
 </head>
-<body class="bg-gray-100 flex">
-    <!-- Sidebar -->
-    <aside class="w-64 bg-indigo-800 text-white flex flex-col fixed h-full">
-        <div class="p-4">
-            <h1 class="text-2xl font-bold">GameHub</h1>
-        </div>
-        <nav class="flex-1">
-            <ul>
-                <li class="hover:bg-indigo-700 p-4">
-                    <a href="#" class="flex items-center">
-                        <i class="fas fa-home mr-2"></i> Dashboard
-                    </a>
-                </li>
-                <li class="hover:bg-indigo-700 p-4">
-                    <a href="#" class="flex items-center">
-                        <i class="fas fa-gamepad mr-2"></i> Games
-                    </a>
-                </li>
-                <li class="hover:bg-indigo-700 p-4">
-                    <a href="#" class="flex items-center">
-                        <i class="fas fa-users mr-2"></i> Users
-                    </a>
-                </li>
-                <li class="hover:bg-indigo-700 p-4">
-                    <a href="#" class="flex items-center">
-                        <i class="fas fa-chart-bar mr-2"></i> Analytics
-                    </a>
-                </li>
-                <li class="hover:bg-indigo-700 p-4">
-                    <a href="#" class="flex items-center">
-                        <i class="fas fa-cog mr-2"></i> Settings
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </aside>
 
-    <!-- Main Content -->
-    <div class="flex-1 ml-64 flex flex-col">
-        <!-- Top Navigation -->
-        <header class="bg-white shadow-lg">
-            <div class="container mx-auto p-4 flex justify-between items-center">
-                <h2 class="text-xl font-semibold">Admin Dashboard</h2>
-                <div class="flex items-center">
-                    <input type="text" placeholder="Search..." class="border border-gray-300 rounded-md p-2 mr-4" id="search-input">
-                    <button id="open-modal" class="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        <i class="fas fa-plus"></i> Add Game
-                    </button>
+<body>
+    <header>
+        <div class="container">
+            <h1>Welcome to GameHub</h1>
+            <p>Your Ultimate Gaming Destination</p>
+            <div class="cta">
+                <button><a href="products.html">Buy Games</a></button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="features">
+            <div class="feature">
+                <i class="fas fa-gamepad"></i>
+                <h3>Wide Range of Games</h3>
+                <p>Explore our extensive collection of games across various genres.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-users"></i>
+                <h3>Community Engagement</h3>
+                <p>Connect with fellow gamers, join discussions, and share your experiences.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-cogs"></i>
+                <h3>Seamless Experience</h3>
+                <p>Enjoy a smooth and hassle-free gaming experience with our intuitive platform.</p>
+            </div>
+        </div>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials">
+            <div class="container">
+                <div class="testimonial">
+                    <p>"GameHub has transformed the way I play games. I've discovered so many new titles and connected with amazing gamers!"</p>
+                    <p class="testimonial-author">- Stanley Agoti</p>
                 </div>
             </div>
-        </header>
+        </section>
 
-        <!-- Main Section -->
-        <main class="flex-1 bg-gray-100 p-4">
-            <div class="container mx-auto">
-                <div class="bg-white p-6 rounded-lg shadow-lg mb-8">
-                    <h2 class="text-2xl font-semibold mb-4">Games</h2>
-                    <ul id="product-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></ul>
-                    <div id="pagination" class="flex justify-center mt-9"></div>
+        <!-- Pricing Section -->
+        <section class="pricing">
+            <h2 class="price">Pricing Plans</h2>
+            <p class="price-description">Choose the plan that suits your gaming needs.</p>
+            <div class="pricing-options">
+                <div class="pricing-option">
+                    <h3>Basic</h3>
+                    <p>Access to limited games</p>
+                    <p>$9.99/month</p>
+                    <button>Select Plan</button>
+                </div>
+                <div class="pricing-option">
+                    <h3>Premium</h3>
+                    <p>Unlimited access to all games</p>
+                    <p>$19.99/month</p>
+                    <button>Select Plan</button>
                 </div>
             </div>
-        </main>
+        </section>
+
+        <!-- Team Section -->
+        <section class="team">
+            <h2>Meet Our Team</h2>
+            <div class="team-members">
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1559969143-b2defc6419fd?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Z2FtZXJzfGVufDB8fDB8fHww" alt="Team Member">
+                    <h3>Nimrod Nyongesa</h3>
+                    <p>Lead Developer</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1534488972407-5a4aa1e47d83?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Z2FtZXJzfGVufDB8fDB8fHww" alt="Team Member">
+                    <h3>Sandra Sha</h3>
+                    <p>UI/UX Designer</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1569693728023-1cf87d751b7d?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGdhbWVyc3xlbnwwfHwwfHx8MA%3D%3D" alt="Team Member">
+                    <h3>Onesmus Kilonzo</h3>
+                    <p>Marketing Manager</p>
+                </div>
+            </div>
+        </section>
     </div>
 
-    <!-- Modal -->
-    <div id="modal" class="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex justify-center items-center hidden">
-        <div class="bg-white p-6 rounded-lg shadow-lg w-11/12 max-w-2xl">
-            <h2 id="modal-title" class="text-2xl font-semibold mb-4"></h2>
-            <form id="product-form" class="space-y-4">
-                <input type="hidden" id="product-id" />
-                <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700">Game Name:</label>
-                    <input type="text" id="name" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-2">
-                </div>
-                <div>
-                    <label for="price" class="block text-sm font-medium text-gray-700">Price:</label>
-                    <input type="number" step="0.01" id="price" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-2">
-                </div>
-                <div>
-                    <label for="description" class="block text-sm font-medium text-gray-700">Description:</label>
-                    <textarea id="description" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-2"></textarea>
-                </div>
-                <div>
-                    <label for="image-url" class="block text-sm font-medium text-gray-700">Image URL:</label>
-                    <input type="text" id="image-url" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-2">
-                </div>
-                <div class="flex justify-end">
-                    <button type="button" id="close-modal" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-500 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        Close
-                    </button>
-                    <button type="submit" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        Save
-                    </button>
-                </div>
-            </form>
+    <!-- Footer Section -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 GameHub. All rights reserved.</p>
+            <p>Contact us: support@gamehub.com</p>
         </div>
-    </div>
+    </footer>
 
-    <!-- Notification Component -->
-    <div id="notification" class="fixed bottom-4 right-4 bg-white border border-gray-300 shadow-md rounded-md p-4 hidden">
-        <p id="notification-message" class="text-sm"></p>
-        <button id="close-notification" class="ml-2 text-gray-600 hover:text-gray-800 focus:outline-none">
-            <i class="fas fa-times"></i>
-        </button>
-    </div>
-
-
-    <script src="./dist/script.js" type="module"></script>
+    <!-- Include Font Awesome -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </body>
+
 </html>
