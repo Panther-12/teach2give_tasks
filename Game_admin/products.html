@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameHub User Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./products.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <h1>GameHub</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search..." id="search-input">
+            </div>
+            <div class="header-links">
+                <a href="#" id="cart-button">
+                    <i class="fas fa-shopping-cart"></i> Cart
+                </a>
+                <a href="#">
+                    <i class="fas fa-user"></i> Profile
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <nav class="sidebar-nav">
+            <ul>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-gamepad"></i> My Games
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-heart"></i> Wishlist
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-cog"></i> Settings
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="products-container">
+            <h2>Featured Games</h2>
+            <ul id="product-list" class="product-list"></ul>
+        </div>
+    </main>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <h2>Cart</h2>
+            <ul id="cart-items" class="cart-items"></ul>
+            <div class="cart-total">
+                <h3>Total: $<span id="total-price">0.00</span></h3>
+            </div>
+            <div class="modal-buttons">
+                <button type="button" id="close-cart-modal">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./dist/products.js" type="module"></script>
+</body>
+</html>
