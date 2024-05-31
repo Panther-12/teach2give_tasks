@@ -7,6 +7,10 @@ type Product = {
     rating: number;
 };
 
+document.addEventListener("DOMContentLoaded", () => {
+    const cartIcon = document.getElementById("cart-button") as HTMLAnchorElement;
+});
+
 // Get products function
 async function loadProducts() {
     const response = await fetch("http://localhost:3000/products");
@@ -125,6 +129,7 @@ productList.addEventListener("click", (event) => {
     if (target.classList.contains("add-to-cart") || target.closest(".add-to-cart")) {
         const productId = target.getAttribute("data-id") || target.closest(".add-to-cart")?.getAttribute("data-id");
         if (productId) addToCart(productId);
+        showSuccessNot("Item added to cart");
     }
 });
 
@@ -133,9 +138,11 @@ cartItemsList.addEventListener("click", (event) => {
     if (target.classList.contains("remove-item") || target.closest(".remove-item")) {
         const productId = target.getAttribute("data-id") || target.closest(".remove-item")?.getAttribute("data-id");
         if (productId) updateCartItem(productId, false);
+        showSuccessNot("Item removed from cart");
     } else if (target.classList.contains("add-item") || target.closest(".add-item")) {
         const productId = target.getAttribute("data-id") || target.closest(".add-item")?.getAttribute("data-id");
         if (productId) updateCartItem(productId, true);
+        showSuccessNot("Item added to cart");
     }
 });
 
@@ -153,6 +160,54 @@ searchInput.addEventListener("input", (event) => {
     const query = (event.target as HTMLInputElement).value;
     filterProducts(query);
 });
+
+
+// Notification handling
+// Define types
+type NotElement = HTMLElement | null;
+
+// Function to show success notification
+function showSuccessNot(message: string) {
+    const notification: NotificationElement = document.getElementById("notification");
+    const notificationMessage: HTMLElement | null = document.getElementById("notification-message");
+    if (notification && notificationMessage) {
+        notification.classList.remove("hidden");
+        notification.classList.remove("bg-red-300");
+        notification.classList.add("bg-green-300");
+        notificationMessage.textContent = message;
+        setTimeout(() => {
+            hideNot();
+        }, 3000); // Hide notification after 3 seconds
+    }
+}
+
+// Function to show error notification
+function showErrorNot(message: string) {
+    const notification: NotElement = document.getElementById("notification");
+    const notificationMessage: HTMLElement | null = document.getElementById("notification-message");
+    if (notification && notificationMessage) {
+        notification.classList.remove("hidden");
+        notification.classList.remove("bg-green-300");
+        notification.classList.add("bg-red-300");
+        notificationMessage.textContent = message;
+    }
+}
+
+// Function to hide notification
+function hideNot() {
+    const notification: NotificationElement = document.getElementById("notification");
+    if (notification) {
+        notification.classList.add("hidden");
+    }
+}
+
+// Event listener to close notification
+const closeNot: NotElement = document.getElementById("close-notification");
+if (closeNot) {
+    closeNot.addEventListener("click", () => {
+        hideNot();
+    });
+}
 
 
 loadProducts();

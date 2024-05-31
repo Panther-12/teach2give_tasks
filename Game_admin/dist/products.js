@@ -8,6 +8,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+document.addEventListener("DOMContentLoaded", () => {
+    const cartIcon = document.getElementById("cart-button");
+});
 // Get products function
 function loadProducts() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -114,6 +117,7 @@ productList.addEventListener("click", (event) => {
         const productId = target.getAttribute("data-id") || ((_a = target.closest(".add-to-cart")) === null || _a === void 0 ? void 0 : _a.getAttribute("data-id"));
         if (productId)
             addToCart(productId);
+        showSuccessNot("Item added to cart");
     }
 });
 cartItemsList.addEventListener("click", (event) => {
@@ -123,11 +127,13 @@ cartItemsList.addEventListener("click", (event) => {
         const productId = target.getAttribute("data-id") || ((_a = target.closest(".remove-item")) === null || _a === void 0 ? void 0 : _a.getAttribute("data-id"));
         if (productId)
             updateCartItem(productId, false);
+        showSuccessNot("Item removed from cart");
     }
     else if (target.classList.contains("add-item") || target.closest(".add-item")) {
         const productId = target.getAttribute("data-id") || ((_b = target.closest(".add-item")) === null || _b === void 0 ? void 0 : _b.getAttribute("data-id"));
         if (productId)
             updateCartItem(productId, true);
+        showSuccessNot("Item added to cart");
     }
 });
 cartButton.addEventListener("click", () => {
@@ -142,5 +148,44 @@ searchInput.addEventListener("input", (event) => {
     const query = event.target.value;
     filterProducts(query);
 });
+// Function to show success notification
+function showSuccessNot(message) {
+    const notification = document.getElementById("notification");
+    const notificationMessage = document.getElementById("notification-message");
+    if (notification && notificationMessage) {
+        notification.classList.remove("hidden");
+        notification.classList.remove("bg-red-300");
+        notification.classList.add("bg-green-300");
+        notificationMessage.textContent = message;
+        setTimeout(() => {
+            hideNot();
+        }, 3000); // Hide notification after 3 seconds
+    }
+}
+// Function to show error notification
+function showErrorNot(message) {
+    const notification = document.getElementById("notification");
+    const notificationMessage = document.getElementById("notification-message");
+    if (notification && notificationMessage) {
+        notification.classList.remove("hidden");
+        notification.classList.remove("bg-green-300");
+        notification.classList.add("bg-red-300");
+        notificationMessage.textContent = message;
+    }
+}
+// Function to hide notification
+function hideNot() {
+    const notification = document.getElementById("notification");
+    if (notification) {
+        notification.classList.add("hidden");
+    }
+}
+// Event listener to close notification
+const closeNot = document.getElementById("close-notification");
+if (closeNot) {
+    closeNot.addEventListener("click", () => {
+        hideNot();
+    });
+}
 loadProducts();
 renderCart();
