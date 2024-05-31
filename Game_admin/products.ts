@@ -148,8 +148,16 @@ function renderCart() {
         </li>
     `).join('');
 
+
     const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
     totalPriceElement.textContent = totalPrice.toFixed(2);
+
+    // Update cart badge with total items count
+    const cartBadge = document.getElementById("cart-badge");
+    if (cartBadge) {
+        const totalItems = cart.reduce((count, item) => count + item.quantity, 0);
+        cartBadge.textContent = totalItems.toString();
+    }
 }
 
 function addToCart(productId: string) {
