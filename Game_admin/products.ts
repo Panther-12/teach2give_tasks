@@ -190,6 +190,7 @@ function updateCartItem(productId: string, increment: boolean) {
     renderCart();
 }
 
+// filter products from search string
 function filterProducts(query: string) {
     const filteredProducts = products.filter(product => 
         product.name.toLowerCase().includes(query.toLowerCase())
@@ -219,6 +220,7 @@ cartItemsList.addEventListener("click", (event) => {
     }
 });
 
+// Cart button and modal event listeners
 cartButton.addEventListener("click", () => {
     cartModal.style.visibility = "visible";
     cartModal.style.opacity = "1";

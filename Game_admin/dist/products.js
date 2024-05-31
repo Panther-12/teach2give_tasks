@@ -166,6 +166,7 @@ function updateCartItem(productId, increment) {
     }
     renderCart();
 }
+// filter products from search string
 function filterProducts(query) {
     const filteredProducts = products.filter(product => product.name.toLowerCase().includes(query.toLowerCase()));
     renderProducts(filteredProducts);
@@ -196,6 +197,7 @@ cartItemsList.addEventListener("click", (event) => {
         showSuccessNot("Item added to cart");
     }
 });
+// Cart button and modal event listeners
 cartButton.addEventListener("click", () => {
     cartModal.style.visibility = "visible";
     cartModal.style.opacity = "1";
