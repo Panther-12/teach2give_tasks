@@ -1,3 +1,4 @@
+
 // Define the product type based on the given interface
 type Product = {
     id?: string;

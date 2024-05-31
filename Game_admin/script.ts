@@ -6,6 +6,8 @@ type Product = {
     imageUrl: string;
 };
 
+
+
 // Define types
 type NotificationElement = HTMLElement | null;
 

@@ -52,10 +52,14 @@ ul {
 }
 
 .search-bar input {
-    width: 100%;
+    width: 80%;
     padding: 10px;
     border-radius: 8px;
     border: none;
+}
+
+.header-links {
+    display: flex;
 }
 
 .header-links a {
