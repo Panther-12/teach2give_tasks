@@ -172,6 +172,13 @@ ul {
     margin-bottom: 10px;
 }
 
+.card-rating{
+    i{
+        color: #f59e0b;
+        margin-bottom: 10px;
+    }
+}
+
 .add-to-cart {
     background-color: #4f46e5;
     color: white;

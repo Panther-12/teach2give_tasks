@@ -13,14 +13,26 @@ function loadProducts() {
     return __awaiter(this, void 0, void 0, function* () {
         const response = yield fetch("http://localhost:3000/products");
         products = yield response.json();
-        renderProducts();
+        renderProducts(products);
     });
 }
-// Fetch products from the JSON server (simulate with a hardcoded list for now)
+function renderRating(rating) {
+    let stars = '';
+    for (let i = 0; i < 5; i++) {
+        if (i < rating) {
+            stars += '<i class="fas fa-star"></i>';
+        }
+        else {
+            stars += '<i class="far fa-star"></i>';
+        }
+    }
+    return stars;
+}
+// Default incase no products are fetched
 var products = [
-    { id: "1", name: "Game Title 1", description: "Description for Game 1", price: 29.99, imageUrl: "https://via.placeholder.com/150" },
-    { id: "2", name: "Game Title 2", description: "Description for Game 2", price: 39.99, imageUrl: "https://via.placeholder.com/150" },
-    { id: "3", name: "Game Title 3", description: "Description for Game 3", price: 49.99, imageUrl: "https://via.placeholder.com/150" },
+    { id: "1", name: "Game Title 1", description: "Description for Game 1", price: 29.99, imageUrl: "https://via.placeholder.com/150", rating: 4 },
+    { id: "2", name: "Game Title 2", description: "Description for Game 2", price: 39.99, imageUrl: "https://via.placeholder.com/150", rating: 3 },
+    { id: "3", name: "Game Title 3", description: "Description for Game 3", price: 49.99, imageUrl: "https://via.placeholder.com/150", rating: 5 },
 ];
 let cart = [];
 const productList = document.getElementById("product-list");
@@ -29,12 +41,14 @@ const cartItemsList = document.getElementById("cart-items");
 const totalPriceElement = document.getElementById("total-price");
 const cartButton = document.getElementById("cart-button");
 const closeCartModalButton = document.getElementById("close-cart-modal");
-function renderProducts() {
-    productList.innerHTML = products.map(product => `
+const searchInput = document.getElementById("search-input");
+function renderProducts(filteredProducts) {
+    productList.innerHTML = filteredProducts.map(product => `
         <li class="card">
             <img src="${product.imageUrl}" alt="${product.name}">
             <h3 class="card-title">${product.name}</h3>
             <p class="card-description">${product.description}</p>
+            <div class="card-rating">${renderRating(product.rating)}</div>
             <div class="card-price">$${product.price.toFixed(2)}</div>
             <button class="add-to-cart" data-id="${product.id}">
                 <i class="fas fa-cart-plus"></i> Add to Cart
@@ -89,6 +103,10 @@ function updateCartItem(productId, increment) {
     }
     renderCart();
 }
+function filterProducts(query) {
+    const filteredProducts = products.filter(product => product.name.toLowerCase().includes(query.toLowerCase()));
+    renderProducts(filteredProducts);
+}
 productList.addEventListener("click", (event) => {
     var _a;
     const target = event.target;
@@ -119,6 +137,10 @@ cartButton.addEventListener("click", () => {
 closeCartModalButton.addEventListener("click", () => {
     cartModal.style.visibility = "hidden";
     cartModal.style.opacity = "0";
+});
+searchInput.addEventListener("input", (event) => {
+    const query = event.target.value;
+    filterProducts(query);
 });
 loadProducts();
 renderCart();
