@@ -42,6 +42,8 @@ interface CartItem extends Product {
 }
 
 let cart: CartItem[] = [];
+let currentPage2 = 1;
+const itemsPerPage2 = 6;
 
 const productList = document.getElementById("product-list") as HTMLUListElement;
 const cartModal = document.getElementById("cart-modal") as HTMLDivElement;
@@ -50,9 +52,19 @@ const totalPriceElement = document.getElementById("total-price") as HTMLSpanElem
 const cartButton = document.getElementById("cart-button") as HTMLAnchorElement;
 const closeCartModalButton = document.getElementById("close-cart-modal") as HTMLButtonElement;
 const searchInput = document.getElementById("search-input") as HTMLInputElement;
+const pagination2 = document.getElementById("pagination") as HTMLDivElement;
 
 function renderProducts(filteredProducts: Product[]) {
-    productList.innerHTML = filteredProducts.map(product => `
+    const searchQuery = searchInput.value.toLowerCase();
+    filteredProducts = products.filter(product =>
+        product.name.toLowerCase().includes(searchQuery)
+    );
+    const paginatedProducts = paginate2(filteredProducts, currentPage2, itemsPerPage2);
+
+    // Clear the product list before rendering
+    productList.innerHTML = "";
+
+    productList.innerHTML = paginatedProducts.map(product => `
         <li class="card">
             <img src="${product.imageUrl}" alt="${product.name}">
             <h3 class="card-title">${product.name}</h3>
@@ -64,6 +76,59 @@ function renderProducts(filteredProducts: Product[]) {
             </button>
         </li>
     `).join('');
+
+    // Render pagination controls
+    renderPagination2(filteredProducts.length);
+}
+
+// Paginate function
+function paginate2(array: any[], currentPage: number, itemsPerPage: number) {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    return array.slice(startIndex, startIndex + itemsPerPage);
+}
+
+// Render pagination function
+function renderPagination2(totalItems: number) {
+    const totalPages = Math.ceil(totalItems / itemsPerPage2);
+
+    // Clear previous pagination buttons
+    pagination2.innerHTML = "";
+
+    // Render previous page button
+    const prevButton = document.createElement("button");
+    prevButton.textContent = "Previous";
+    prevButton.className = "bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-md shadow-md mr-2";
+    prevButton.addEventListener("click", () => {
+        if (currentPage2 > 1) {
+            currentPage2--;
+            renderProducts();
+        }
+    });
+    pagination2.appendChild(prevButton);
+
+    // Render page numbers
+    for (let i = 1; i <= totalPages; i++) {
+        const pageButton = document.createElement("button");
+        pageButton.textContent = i.toString();
+        pageButton.className = currentPage2 === i ? "bg-indigo-600 text-white py-2 px-4 rounded-md shadow-md mx-1" : "bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-md shadow-md mx-1";
+        pageButton.addEventListener("click", () => {
+            currentPage2 = i;
+            renderProducts();
+        });
+        pagination2.appendChild(pageButton);
+    }
+
+    // Render next page button
+    const nextButton = document.createElement("button");
+    nextButton.textContent = "Next";
+    nextButton.className = "bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-md shadow-md ml-2";
+    nextButton.addEventListener("click", () => {
+        if (currentPage2 < totalPages) {
+            currentPage2++;
+            renderProducts();
+        }
+    });
+    pagination2.appendChild(nextButton);
 }
 
 function renderCart() {
@@ -163,7 +228,6 @@ searchInput.addEventListener("input", (event) => {
 
 
 // Notification handling
-// Define types
 type NotElement = HTMLElement | null;
 
 // Function to show success notification
@@ -172,8 +236,8 @@ function showSuccessNot(message: string) {
     const notificationMessage: HTMLElement | null = document.getElementById("notification-message");
     if (notification && notificationMessage) {
         notification.classList.remove("hidden");
-        notification.classList.remove("bg-red-300");
-        notification.classList.add("bg-green-300");
+        notification.classList.remove("bg-red-200");
+        notification.classList.add("bg-green-200");
         notificationMessage.textContent = message;
         setTimeout(() => {
             hideNot();
@@ -187,8 +251,8 @@ function showErrorNot(message: string) {
     const notificationMessage: HTMLElement | null = document.getElementById("notification-message");
     if (notification && notificationMessage) {
         notification.classList.remove("hidden");
-        notification.classList.remove("bg-green-300");
-        notification.classList.add("bg-red-300");
+        notification.classList.remove("bg-green-200");
+        notification.classList.add("bg-red-200");
         notificationMessage.textContent = message;
     }
 }

@@ -46,16 +46,25 @@ ul {
     margin: 0;
 }
 
+#notification{
+    width: fit-content;
+    justify-content: space-between;
+}
 .search-bar {
     flex-grow: 1;
     margin: 0 20px;
 }
 
+#pagination{
+    margin-left: 240px;
+}
 .search-bar input {
     width: 80%;
     padding: 10px;
     border-radius: 8px;
     border: none;
+    outline: none;
+    color: black;
 }
 
 .header-links {

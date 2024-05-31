@@ -68,7 +68,7 @@
     <!-- Cart Modal -->
     <div id="cart-modal" class="modal">
         <div class="modal-content">
-            <h2>Cart</h2>
+            <h2 style="font-weight: 900; margin-bottom: 20px;">Cart</h2>
             <ul id="cart-items" class="cart-items"></ul>
             <div class="cart-total">
                 <h3>Total: $<span id="total-price">0.00</span></h3>
@@ -79,8 +79,10 @@
         </div>
     </div>
 
+    <div id="pagination" class="flex justify-center mt-9 mb-9"></div>
+
     <!-- Notification Component -->
-    <div id="notification" class="fixed bottom-4 right-4 bg-white border border-gray-300 shadow-mdrounded-md p-4 hidden">
+    <div id="notification" class="fixed bottom-4 rounded-md right-4 bg-white border border-gray-300 shadow-md p-4 hidden">
         <p id="notification-message" class="text-sm"></p>
         <button id="close-notification" class="ml-2 text-gray-600 hover:text-gray-800 focus:outline-none">
             <i class="fas fa-times"></i>
