@@ -1,3 +1,5 @@
+use Notebook;
+
 CREATE PROCEDURE AddNote
     @NoteID VARCHAR(255),
     @NoteTitle VARCHAR(100),
