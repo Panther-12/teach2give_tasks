@@ -9,19 +9,19 @@ POST http://localhost:3000/notes
 Content-Type: application/json
 
 {
-    "NoteID": "Mobile app development",
-    "NoteTitle": "Develop a mobile app for the business",
-    "NoteContent": "2022-05-31"
+    "title": "Mobile app development",
+    "content": "Develop a mobile app for the business",
+    "created_at":""
 }
 
 ### UPDATE A PROJECT
-PUT http://localhost:3000/notes/6
+PUT http://localhost:3000/notes/1a6f0efe-9531-4d9f-b923-32c92eca38d6
 Content-Type: application/json
 
 {
-    "NoteID": "Mobile app development",
-    "NoteTitle": "Develop a mobile app for the business",
-    "NoteContent": "2022-05-31"
+    "title": "Web app development",
+    "content": "Develop a web app for the business",
+    "created_at":"2024-06-05"
 }
 
 ### DELETE A PROJECT

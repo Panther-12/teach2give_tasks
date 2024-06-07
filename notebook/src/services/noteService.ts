@@ -11,9 +11,10 @@ export class NoteService{
 
         
         let result = await (await pool.request()
+        .input("NoteID", v4())
         .input("NoteTitle", note.title)
         .input("NoteContent", note.content)
-        .input("CreatedAt", note.created_at)
+        .input("CreatedAt", note.created_at || new Date().toISOString())
         .execute("addNote")).rowsAffected
 
         console.log(result);
@@ -50,7 +51,7 @@ export class NoteService{
         .input("NoteID", NoteExists[0].NoteID)
         .input("NoteTitle", note.title)
         .input("NoteContent", note.content)
-        .input("CreatedAt", note.created_at)
+        .input("CreatedAt", note.created_at || NoteExists[0].CreatedAt)
         .execute("updateNote")).rowsAffected
 
         if(result[0] < 1){

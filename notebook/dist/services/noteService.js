@@ -15,15 +15,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.NoteService = void 0;
 const mssql_1 = __importDefault(require("mssql"));
 const lodash_1 = __importDefault(require("lodash"));
+const uuid_1 = require("uuid");
 const db_config_1 = require("../config/db.config");
 class NoteService {
     createNote(note) {
         return __awaiter(this, void 0, void 0, function* () {
             let pool = yield mssql_1.default.connect(db_config_1.config);
             let result = yield (yield pool.request()
+                .input("NoteID", (0, uuid_1.v4)())
                 .input("NoteTitle", note.title)
                 .input("NoteContent", note.content)
-                .input("CreatedAt", note.created_at)
+                .input("CreatedAt", note.created_at || new Date().toISOString())
                 .execute("addNote")).rowsAffected;
             console.log(result);
             if (result[0] == 1) {
@@ -54,7 +56,7 @@ class NoteService {
                     .input("NoteID", NoteExists[0].NoteID)
                     .input("NoteTitle", note.title)
                     .input("NoteContent", note.content)
-                    .input("CreatedAt", note.created_at)
+                    .input("CreatedAt", note.created_at || NoteExists[0].CreatedAt)
                     .execute("updateNote")).rowsAffected;
                 if (result[0] < 1) {
                     return {

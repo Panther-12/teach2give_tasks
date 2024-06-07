@@ -7,6 +7,6 @@ CREATE PROCEDURE AddNote
     @CreatedAt DATE
 AS
 BEGIN
-    INSERT INTO Note (NoteID, NoteTitle, NoteContent, CreatedAt)
+    INSERT INTO Notebook (NoteID, NoteTitle, NoteContent, CreatedAt)
     VALUES (@NoteID, @NoteTitle, @NoteContent, @CreatedAt);
 END
