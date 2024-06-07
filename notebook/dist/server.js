@@ -13,10 +13,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const db_config_1 = require("./config/db.config");
+const database_1 = require("./database");
 const mssql_1 = __importDefault(require("mssql"));
 const body_parser_1 = __importDefault(require("body-parser"));
-const noteRoutes_1 = __importDefault(require("./routers/noteRoutes"));
+const noteRoutes_1 = __importDefault(require("./routes/noteRoutes"));
 const app = (0, express_1.default)();
 const cors = require("cors");
 require('dotenv').config();
@@ -30,7 +30,7 @@ app.use('/notes', noteRoutes_1.default);
 // test connection
 function testConnection() {
     return __awaiter(this, void 0, void 0, function* () {
-        let pool = yield mssql_1.default.connect(db_config_1.config);
+        let pool = yield mssql_1.default.connect(database_1.config);
         if (pool.connected) {
             console.log("Connection established ...");
         }

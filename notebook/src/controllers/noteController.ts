@@ -1,4 +1,4 @@
-import { Note } from "../interfaces/noteInterface";
+import { Note } from "../models/note";
 import express, { Response, Request } from 'express';
 import { NoteService } from "../services/noteService";
 

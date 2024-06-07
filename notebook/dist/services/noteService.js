@@ -16,19 +16,18 @@ exports.NoteService = void 0;
 const mssql_1 = __importDefault(require("mssql"));
 const lodash_1 = __importDefault(require("lodash"));
 const uuid_1 = require("uuid");
-const db_config_1 = require("../config/db.config");
+const database_1 = require("../database");
 class NoteService {
     // Create a new note
     createNote(note) {
         return __awaiter(this, void 0, void 0, function* () {
-            let pool = yield mssql_1.default.connect(db_config_1.config);
+            let pool = yield mssql_1.default.connect(database_1.config);
             let result = yield (yield pool.request()
                 .input("NoteID", (0, uuid_1.v4)())
                 .input("NoteTitle", note.title)
                 .input("NoteContent", note.content)
                 .input("CreatedAt", note.created_at || new Date().toISOString())
                 .execute("addNote")).rowsAffected;
-            console.log(result);
             if (result[0] == 1) {
                 return {
                     message: "Note created successfully"
@@ -44,10 +43,9 @@ class NoteService {
     // Update a specified note
     updateNote(note_id, note) {
         return __awaiter(this, void 0, void 0, function* () {
-            let pool = yield mssql_1.default.connect(db_config_1.config);
+            let pool = yield mssql_1.default.connect(database_1.config);
             // Check if Note exists
             let NoteExists = yield (yield pool.request().query(`SELECT * FROM Notebook WHERE NoteID='${note_id}'`)).recordset;
-            console.log(NoteExists);
             // If the note does not exist return a custom error message
             if (lodash_1.default.isEmpty(NoteExists)) {
                 return {
@@ -77,8 +75,8 @@ class NoteService {
     // Get all the notes
     fetchNotes() {
         return __awaiter(this, void 0, void 0, function* () {
-            let pool = yield mssql_1.default.connect(db_config_1.config);
-            let response = (yield pool.request().query('SELECT * FROM Notebook')).recordset;
+            let pool = yield mssql_1.default.connect(database_1.config);
+            let response = (yield pool.request().execute("fetchAllNotes")).recordset;
             return {
                 Notes: response
             };
@@ -87,8 +85,8 @@ class NoteService {
     // Get one note 
     fetchOneNote(note_id) {
         return __awaiter(this, void 0, void 0, function* () {
-            let pool = yield mssql_1.default.connect(db_config_1.config);
-            let response = (yield pool.request().query(`SELECT * FROM Notebook WHERE NoteID = '${note_id}'`)).recordset;
+            let pool = yield mssql_1.default.connect(database_1.config);
+            let response = (yield pool.request().input("NoteID", note_id).execute("getNoteById")).recordset;
             if (response.length < 1) {
                 return "No Note found";
             }
@@ -102,13 +100,13 @@ class NoteService {
     // Delete a specified note
     deleteNote(note_id) {
         return __awaiter(this, void 0, void 0, function* () {
-            let pool = yield mssql_1.default.connect(db_config_1.config);
+            let pool = yield mssql_1.default.connect(database_1.config);
             let response = (yield pool.request().query(`SELECT * FROM Notebook WHERE NoteID = '${note_id}'`)).recordset;
             if (response.length < 1) {
                 return "Note not found";
             }
             else {
-                yield pool.request().query(`DELETE FROM Notebook WHERE NoteID = '${note_id}'`);
+                yield pool.request().input("NoteID", note_id).execute("deleteNote");
                 return "Note deleted successfully";
             }
         });

@@ -1,8 +1,8 @@
 import mssql from 'mssql'
 import lodash from 'lodash'
-import { Note } from "../interfaces/noteInterface";
+import { Note } from "../models/note";
 import {v4} from 'uuid'
-import { config } from '../config/db.config';
+import { config } from '../database';
 
 export class NoteService{
 
@@ -17,10 +17,7 @@ export class NoteService{
         .input("NoteContent", note.content)
         .input("CreatedAt", note.created_at || new Date().toISOString())
         .execute("addNote")).rowsAffected
-
-        console.log(result);
         
-
         if(result[0] == 1){
             return {
                 message: "Note created successfully"
@@ -39,8 +36,6 @@ export class NoteService{
 
         // Check if Note exists
         let NoteExists = await (await pool.request().query(`SELECT * FROM Notebook WHERE NoteID='${note_id}'`)).recordset
-
-        console.log(NoteExists);
         
         // If the note does not exist return a custom error message
         if(lodash.isEmpty(NoteExists)){
@@ -72,7 +67,7 @@ export class NoteService{
     // Get all the notes
     async fetchNotes(){
         let pool = await mssql.connect(config)
-        let response = (await pool.request().query('SELECT * FROM Notebook')).recordset
+        let response = (await pool.request().execute("fetchAllNotes")).recordset
         return {
             Notes: response
         }
@@ -81,7 +76,7 @@ export class NoteService{
     // Get one note 
     async fetchOneNote(note_id:string){
         let pool = await mssql.connect(config)
-        let response = (await pool.request().query(`SELECT * FROM Notebook WHERE NoteID = '${note_id}'`)).recordset
+        let response = (await pool.request().input("NoteID",note_id).execute("getNoteById")).recordset
 
         if(response.length < 1){
             return "No Note found"
@@ -100,7 +95,7 @@ export class NoteService{
         if(response.length < 1){
             return "Note not found"
         }else{
-            await pool.request().query(`DELETE FROM Notebook WHERE NoteID = '${note_id}'`)
+            await pool.request().input("NoteID",note_id).execute("deleteNote")
             return "Note deleted successfully"
         }
         

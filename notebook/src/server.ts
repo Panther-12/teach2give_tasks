@@ -1,9 +1,9 @@
 import express, { Response, Request, json } from 'express';
-import { config } from './config/db.config';
+import { config } from './database';
 import mssql from 'mssql';
 import bodyParser from 'body-parser';
 
-import noteRouter from './routers/noteRoutes';
+import noteRouter from './routes/noteRoutes';
 
 const app = express();
 const cors = require("cors");

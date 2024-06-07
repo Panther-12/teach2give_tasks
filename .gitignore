@@ -1,4 +1,3 @@
 node_modules
-/notebook/dist
-/notebook/.env
+/notebook/dist/
 .env
