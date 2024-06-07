@@ -1,3 +1,0 @@
-ALTER TABLE Project 
-ADD CONSTRAINT DF_Project_StatusID 
-DEFAULT 2 FOR StatusID;

@@ -1,5 +1,0 @@
-CREATE PROCEDURE ViewAllProjects
-AS
-BEGIN
-    SELECT * FROM Project;
-END;

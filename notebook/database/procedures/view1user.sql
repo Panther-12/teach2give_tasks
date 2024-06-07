@@ -1,7 +1,0 @@
-CREATE PROCEDURE ViewUser
-    @UserID INT
-AS
-BEGIN
-    SELECT * FROM User_
-    WHERE UserID = @UserID;
-END;

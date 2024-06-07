@@ -10,11 +10,10 @@ export class NoteService{
         let pool = await mssql.connect(config)
 
         
-        // Notes.push(newNote);
         let result = await (await pool.request()
-        .input("NoteName", note.title)
-        .input("NoteDescription", note.content)
-        .input("EndDate", note.created_at)
+        .input("NoteTitle", note.title)
+        .input("NoteContent", note.content)
+        .input("CreatedAt", note.created_at)
         .execute("addNote")).rowsAffected
 
         console.log(result);
@@ -34,8 +33,9 @@ export class NoteService{
 
     async updateNote(note_id:string, note:Note){
         let pool = await mssql.connect(config)
+
         //check if Note exists
-        let NoteExists = await (await pool.request().query(`SELECT * FROM Note WHERE NoteID='${note_id}'`)).recordset
+        let NoteExists = await (await pool.request().query(`SELECT * FROM Notebook WHERE NoteID='${note_id}'`)).recordset
 
         console.log(NoteExists);
         
@@ -48,10 +48,9 @@ export class NoteService{
 
         let result = (await pool.request()
         .input("NoteID", NoteExists[0].NoteID)
-        .input("NoteName", note.title)
-        .input("NoteDescription", note.content)
-        .input("EndDate", note.created_at)
-        .input("StatusID", 2)
+        .input("NoteTitle", note.title)
+        .input("NoteContent", note.content)
+        .input("CreatedAt", note.created_at)
         .execute("updateNote")).rowsAffected
 
         if(result[0] < 1){
@@ -69,7 +68,7 @@ export class NoteService{
 
     async fetchNotes(){
         let pool = await mssql.connect(config)
-        let response = (await pool.request().query('SELECT * FROM Note')).recordset
+        let response = (await pool.request().query('SELECT * FROM Notebook')).recordset
         return {
             Notes: response
         }
@@ -77,7 +76,7 @@ export class NoteService{
 
     async fetchOneNote(note_id:string){
         let pool = await mssql.connect(config)
-        let response = (await pool.request().query(`SELECT * FROM Note WHERE NoteID = '${note_id}'`)).recordset
+        let response = (await pool.request().query(`SELECT * FROM Notebook WHERE NoteID = '${note_id}'`)).recordset
 
         if(response.length < 1){
             return "No Note found"
@@ -90,12 +89,12 @@ export class NoteService{
 
     async deleteNote(note_id:string){
         let pool = await mssql.connect(config)
-        let response = (await pool.request().query(`SELECT * FROM Note WHERE NoteID = '${note_id}'`)).recordset
+        let response = (await pool.request().query(`SELECT * FROM Notebook WHERE NoteID = '${note_id}'`)).recordset
         
         if(response.length < 1){
             return "Note not found"
         }else{
-            await pool.request().query(`DELETE FROM Note WHERE NoteID = '${note_id}'`)
+            await pool.request().query(`DELETE FROM Notebook WHERE NoteID = '${note_id}'`)
             return "Note deleted successfully"
         }
         

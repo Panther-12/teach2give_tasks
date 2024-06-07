@@ -1,9 +1,0 @@
-CREATE TABLE Assignment (
-    AssignmentID BIGINT IDENTITY(1,1) PRIMARY KEY,
-    UserID BIGINT NOT NULL,
-    ProjectID BIGINT NOT NULL,
-    AssignedDate DATETIME DEFAULT (GETDATE()) NOT NULL,
-    FOREIGN KEY (UserID) REFERENCES User_(UserID),
-    FOREIGN KEY (ProjectID) REFERENCES Project(ProjectID),
-    UNIQUE (UserID)
-    )
