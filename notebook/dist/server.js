@@ -25,7 +25,7 @@ app.use(cors());
 app.use(express_1.default.json());
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: true }));
-// Bind the routers
+// Bind the router
 app.use('/notes', noteRoutes_1.default);
 // test connection
 function testConnection() {

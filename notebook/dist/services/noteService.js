@@ -18,6 +18,7 @@ const lodash_1 = __importDefault(require("lodash"));
 const uuid_1 = require("uuid");
 const db_config_1 = require("../config/db.config");
 class NoteService {
+    // Create a new note
     createNote(note) {
         return __awaiter(this, void 0, void 0, function* () {
             let pool = yield mssql_1.default.connect(db_config_1.config);
@@ -40,12 +41,14 @@ class NoteService {
             }
         });
     }
+    // Update a specified note
     updateNote(note_id, note) {
         return __awaiter(this, void 0, void 0, function* () {
             let pool = yield mssql_1.default.connect(db_config_1.config);
-            //check if Note exists
+            // Check if Note exists
             let NoteExists = yield (yield pool.request().query(`SELECT * FROM Notebook WHERE NoteID='${note_id}'`)).recordset;
             console.log(NoteExists);
+            // If the note does not exist return a custom error message
             if (lodash_1.default.isEmpty(NoteExists)) {
                 return {
                     error: "The Note was not found"
@@ -71,6 +74,7 @@ class NoteService {
             }
         });
     }
+    // Get all the notes
     fetchNotes() {
         return __awaiter(this, void 0, void 0, function* () {
             let pool = yield mssql_1.default.connect(db_config_1.config);
@@ -80,6 +84,7 @@ class NoteService {
             };
         });
     }
+    // Get one note 
     fetchOneNote(note_id) {
         return __awaiter(this, void 0, void 0, function* () {
             let pool = yield mssql_1.default.connect(db_config_1.config);
@@ -94,6 +99,7 @@ class NoteService {
             }
         });
     }
+    // Delete a specified note
     deleteNote(note_id) {
         return __awaiter(this, void 0, void 0, function* () {
             let pool = yield mssql_1.default.connect(db_config_1.config);

@@ -6,6 +6,7 @@ import { config } from '../config/db.config';
 
 export class NoteService{
 
+    // Create a new note
     async createNote(note: Note){
         let pool = await mssql.connect(config)
 
@@ -32,15 +33,16 @@ export class NoteService{
    
     }
 
+    // Update a specified note
     async updateNote(note_id:string, note:Note){
         let pool = await mssql.connect(config)
 
-        //check if Note exists
+        // Check if Note exists
         let NoteExists = await (await pool.request().query(`SELECT * FROM Notebook WHERE NoteID='${note_id}'`)).recordset
 
         console.log(NoteExists);
         
-
+        // If the note does not exist return a custom error message
         if(lodash.isEmpty(NoteExists)){
             return {
                 error: "The Note was not found"
@@ -67,6 +69,7 @@ export class NoteService{
     }
     }
 
+    // Get all the notes
     async fetchNotes(){
         let pool = await mssql.connect(config)
         let response = (await pool.request().query('SELECT * FROM Notebook')).recordset
@@ -75,6 +78,7 @@ export class NoteService{
         }
     }
 
+    // Get one note 
     async fetchOneNote(note_id:string){
         let pool = await mssql.connect(config)
         let response = (await pool.request().query(`SELECT * FROM Notebook WHERE NoteID = '${note_id}'`)).recordset
@@ -88,6 +92,7 @@ export class NoteService{
         }
     }
 
+    // Delete a specified note
     async deleteNote(note_id:string){
         let pool = await mssql.connect(config)
         let response = (await pool.request().query(`SELECT * FROM Notebook WHERE NoteID = '${note_id}'`)).recordset

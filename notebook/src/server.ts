@@ -18,7 +18,7 @@ app.use(express.json())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Bind the routers
+// Bind the router
 app.use('/notes',noteRouter)
 
 // test connection
