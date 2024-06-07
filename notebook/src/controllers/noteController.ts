@@ -1,54 +1,54 @@
-import { Project } from "../interfaces/noteInterface";
+import { Note } from "../interfaces/noteInterface";
 import express, { Response, Request } from 'express';
-import { ProjectService } from "../services/noteService";
+import { NoteService } from "../services/noteService";
 
-const projectService = new ProjectService()
+const noteService = new NoteService()
 
-const fetchAllProjects = (req: Request, res: Response) =>{
-    projectService.fetchProjects().then(result =>{
+const fetchAllnotes = (req: Request, res: Response) =>{
+    noteService.fetchNotes().then(result =>{
         res.status(200).json(result)
     }).catch(err =>{
         res.status(500).json(err)
     })
 }
 
-const fetchOneProject = (req: Request, res: Response) =>{
-    projectService.fetchOneProject(req.params.id).then(result =>{
+const fetchOnenote = (req: Request, res: Response) =>{
+    noteService.fetchOneNote(req.params.id).then(result =>{
         res.status(200).json(result)
     }).catch(err =>{
         res.status(500).json(err)
     })
 }
 
-const addProject = (req: Request, res: Response) =>{
-    let project: Project = req.body
-    projectService.createProject(project).then(result =>{
+const addnote = (req: Request, res: Response) =>{
+    let note: Note = req.body
+    noteService.createNote(note).then(result =>{
         res.status(200).json(result)
     }).catch(err =>{
         res.status(500).json(err)
     })
 }
 
-const updateProject = (req: Request, res: Response) =>{
-    let project: Project = req.body
-    projectService.updateProject(req.params.id, project).then(result =>{
+const updatenote = (req: Request, res: Response) =>{
+    let note: Note = req.body
+    noteService.updateNote(req.params.id, note).then(result =>{
         res.status(200).json(result)
     }).catch(err =>{
         res.status(500).json(err)
     })
 }
 
-const patchProject = (req: Request, res: Response) =>{
-    let project: Project = req.body
-    projectService.updateProject(req.params.id, project).then(result =>{
+const patchnote = (req: Request, res: Response) =>{
+    let note: Note = req.body
+    noteService.updateNote(req.params.id, note).then(result =>{
         res.status(200).json(result)
     }).catch(err =>{
         res.status(500).json(err)
     })
 }
 
-const deleteProject = (req: Request, res: Response) =>{
-    projectService.deleteProject(req.params.id).then(result =>{
+const deletenote = (req: Request, res: Response) =>{
+    noteService.deleteNote(req.params.id).then(result =>{
         res.status(200).json(result)
     }).catch(err =>{
         res.status(500).json(err)
@@ -56,10 +56,10 @@ const deleteProject = (req: Request, res: Response) =>{
 }
 
 export {
-    fetchAllProjects,
-    fetchOneProject,
-    updateProject,
-    addProject,
-    deleteProject,
-    patchProject
+    fetchAllnotes,
+    fetchOnenote,
+    updatenote,
+    addnote,
+    deletenote,
+    patchnote
 }

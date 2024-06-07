@@ -1,58 +1,58 @@
 import mssql from 'mssql'
 import lodash from 'lodash'
-import { Project } from "../interfaces/noteInterface";
+import { Note } from "../interfaces/noteInterface";
 import {v4} from 'uuid'
 import { config } from '../config/db.config';
 
-export class ProjectService{
+export class NoteService{
 
-    async createProject(proj: Project){
+    async createNote(note: Note){
         let pool = await mssql.connect(config)
 
         
-        // Projects.push(newProject);
+        // Notes.push(newNote);
         let result = await (await pool.request()
-        .input("ProjectName", proj.name)
-        .input("ProjectDescription", proj.description)
-        .input("EndDate", proj.end_date)
-        .execute("addProject")).rowsAffected
+        .input("NoteName", note.title)
+        .input("NoteDescription", note.content)
+        .input("EndDate", note.created_at)
+        .execute("addNote")).rowsAffected
 
         console.log(result);
         
 
         if(result[0] == 1){
             return {
-                message: "Project created successfully"
+                message: "Note created successfully"
             }
         }else{
             return {
-                error: "Unable to create Project"
+                error: "Unable to create Note"
             }
         }
    
     }
 
-    async updateProject(proj_id:string, proj:Project){
+    async updateNote(note_id:string, note:Note){
         let pool = await mssql.connect(config)
-        //check if project exists
-        let ProjectExists = await (await pool.request().query(`SELECT * FROM Project WHERE ProjectID='${proj_id}'`)).recordset
+        //check if Note exists
+        let NoteExists = await (await pool.request().query(`SELECT * FROM Note WHERE NoteID='${note_id}'`)).recordset
 
-        console.log(ProjectExists);
+        console.log(NoteExists);
         
 
-        if(lodash.isEmpty(ProjectExists)){
+        if(lodash.isEmpty(NoteExists)){
             return {
-                error: "Project not found"
+                error: "Note not found"
             }
         }else{
 
         let result = (await pool.request()
-        .input("ProjectID", ProjectExists[0].ProjectID)
-        .input("ProjectName", proj.name)
-        .input("ProjectDescription", proj.description)
-        .input("EndDate", proj.end_date)
+        .input("NoteID", NoteExists[0].NoteID)
+        .input("NoteName", note.title)
+        .input("NoteDescription", note.content)
+        .input("EndDate", note.created_at)
         .input("StatusID", 2)
-        .execute("updateProject")).rowsAffected
+        .execute("updateNote")).rowsAffected
 
         if(result[0] < 1){
             return {
@@ -60,43 +60,43 @@ export class ProjectService{
             }
         }else{
             return {
-                message: "Project updated successfully"
+                message: "Note updated successfully"
             };
         }
                     
     }
     }
 
-    async fetchProjects(){
+    async fetchNotes(){
         let pool = await mssql.connect(config)
-        let response = (await pool.request().query('SELECT * FROM Project')).recordset
+        let response = (await pool.request().query('SELECT * FROM Note')).recordset
         return {
-            Projects: response
+            Notes: response
         }
     }
 
-    async fetchOneProject(proj_id:string){
+    async fetchOneNote(note_id:string){
         let pool = await mssql.connect(config)
-        let response = (await pool.request().query(`SELECT * FROM Project WHERE ProjectID = '${proj_id}'`)).recordset
+        let response = (await pool.request().query(`SELECT * FROM Note WHERE NoteID = '${note_id}'`)).recordset
 
         if(response.length < 1){
-            return "No Project found"
+            return "No Note found"
         }else{
             return {
-                Project: response[0]
+                Note: response[0]
             };
         }
     }
 
-    async deleteProject(proj_id:string){
+    async deleteNote(note_id:string){
         let pool = await mssql.connect(config)
-        let response = (await pool.request().query(`SELECT * FROM Project WHERE ProjectID = '${proj_id}'`)).recordset
+        let response = (await pool.request().query(`SELECT * FROM Note WHERE NoteID = '${note_id}'`)).recordset
         
         if(response.length < 1){
-            return "Project not found"
+            return "Note not found"
         }else{
-            await pool.request().query(`DELETE FROM Project WHERE ProjectID = '${proj_id}'`)
-            return "Project deleted successfully"
+            await pool.request().query(`DELETE FROM Note WHERE NoteID = '${note_id}'`)
+            return "Note deleted successfully"
         }
         
     }
