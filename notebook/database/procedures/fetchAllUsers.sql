@@ -1,0 +1,5 @@
+CREATE PROCEDURE fetchAllUsers
+AS
+BEGIN
+    SELECT * FROM User_;
+END

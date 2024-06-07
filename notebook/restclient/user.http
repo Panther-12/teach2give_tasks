@@ -1,0 +1,42 @@
+### GET ALL USERS
+GET http://localhost:3000/users
+
+### POST A USER
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "name": "Charlie Brown",
+    "email": "charlie.brown@gmail.com",
+    "password": "password5",
+    "phone_number": "0740837671" 
+}
+
+### GET ALL PROJECTS
+GET http://localhost:3000/projects
+
+### GET ONE PROJECT
+GET http://localhost:3000/projects/6
+
+### POST A PROJECT
+POST http://localhost:3000/projects
+Content-Type: application/json
+
+{
+    "name": "Mobile app development",
+    "description": "Develop a mobile app for the business",
+    "end_date": "2022-05-31"
+}
+
+### UPDATE A PROJECT
+PUT http://localhost:3000/projects/6
+Content-Type: application/json
+
+{
+    "name": "Mobile app development",
+    "description": "Develop an IOS mobile app for the business",
+    "end_date": "2022-05-31"
+}
+
+### DELETE A PROJECT
+DELETE  http://localhost:3000/projects/2

@@ -1,0 +1,14 @@
+CREATE PROCEDURE DeleteAllAssignedProjects
+AS
+BEGIN
+    BEGIN TRANSACTION;
+    BEGIN TRY
+        DELETE FROM Project WHERE ProjectID IN (SELECT ProjectID FROM Assignment);
+        DELETE FROM Assignment;
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        THROW;
+    END CATCH
+END;

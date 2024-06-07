@@ -1,0 +1,14 @@
+CREATE PROCEDURE DeleteAllUsers
+AS
+BEGIN
+    BEGIN TRANSACTION;
+    BEGIN TRY
+        DELETE FROM Assignment;
+        DELETE FROM User_;
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        THROW;
+    END CATCH
+END;

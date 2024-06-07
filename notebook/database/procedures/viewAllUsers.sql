@@ -1,0 +1,5 @@
+CREATE PROCEDURE ViewAllUsers
+AS
+BEGIN
+    SELECT * FROM User_;
+END;

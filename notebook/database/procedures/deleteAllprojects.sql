@@ -1,0 +1,14 @@
+CREATE PROCEDURE DeleteAllProjects
+AS
+BEGIN
+    BEGIN TRANSACTION;
+    BEGIN TRY
+        DELETE FROM Assignment;
+        DELETE FROM Project;
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        THROW;
+    END CATCH
+END;
