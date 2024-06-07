@@ -26,7 +26,7 @@ export class NoteService{
             }
         }else{
             return {
-                error: "Unable to create Note"
+                error: "Failed to create the Note"
             }
         }
    
@@ -43,7 +43,7 @@ export class NoteService{
 
         if(lodash.isEmpty(NoteExists)){
             return {
-                error: "Note not found"
+                error: "The Note was not found"
             }
         }else{
 
@@ -56,7 +56,7 @@ export class NoteService{
 
         if(result[0] < 1){
             return {
-                error: "Was not able to update"
+                error: "The Note update failed"
             }
         }else{
             return {

@@ -35,7 +35,7 @@ class NoteService {
             }
             else {
                 return {
-                    error: "Unable to create Note"
+                    error: "Failed to create the Note"
                 };
             }
         });
@@ -48,7 +48,7 @@ class NoteService {
             console.log(NoteExists);
             if (lodash_1.default.isEmpty(NoteExists)) {
                 return {
-                    error: "Note not found"
+                    error: "The Note was not found"
                 };
             }
             else {
@@ -60,7 +60,7 @@ class NoteService {
                     .execute("updateNote")).rowsAffected;
                 if (result[0] < 1) {
                     return {
-                        error: "Was not able to update"
+                        error: "The Note update failed"
                     };
                 }
                 else {
