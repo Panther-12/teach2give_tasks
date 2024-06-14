@@ -8,20 +8,20 @@ export class NoteService{
 
     // Create a new note
     async createNote(note: Note){
+        let id = v4()
         let pool = await mssql.connect(config)
 
         
         let result = await (await pool.request()
-        .input("NoteID", v4())
+        .input("NoteID", id)
         .input("NoteTitle", note.title)
         .input("NoteContent", note.content)
         .input("CreatedAt", note.created_at || new Date().toISOString())
         .execute("addNote")).rowsAffected
         
         if(result[0] == 1){
-            return {
-                message: "Note created successfully"
-            }
+            let response = (await pool.request().input("NoteID",id).execute("getNoteById")).recordset
+            return response[0]
         }else{
             return {
                 error: "Failed to create the Note"
@@ -68,9 +68,7 @@ export class NoteService{
     async fetchNotes(){
         let pool = await mssql.connect(config)
         let response = (await pool.request().execute("fetchAllNotes")).recordset
-        return {
-            Notes: response
-        }
+        return response
     }
 
     // Get one note 
